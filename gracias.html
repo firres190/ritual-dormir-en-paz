@@ -4,12 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>¡Gracias! Tu ritual ya te espera</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3B3550">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Dormir en Paz">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -114,23 +108,74 @@
     font-weight: 700;
     color: #8B84A3;
   }
-  .install-btn {
+  .save-box {
+    width: 100%;
+    max-width: 420px;
+    background: #FFFFFF;
+    border: 1.5px solid oklch(0.9 0.03 295);
+    border-radius: 18px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+  }
+  .save-box p.title {
+    margin: 0;
+    font-weight: 800;
+    font-size: 15px;
+    color: #3B3550;
+  }
+  .save-box p.sub {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #6B6485;
+  }
+  .url-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FBF9F5;
+    border: 1px solid oklch(0.9 0.03 295);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  .url-row input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Mulish', sans-serif;
+    font-size: 13.5px;
+    color: #3B3550;
+    outline: none;
+  }
+  .save-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .save-actions button, .save-actions a {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    width: 100%;
-    max-width: 360px;
-    box-sizing: border-box;
-    padding: 14px 24px;
+    gap: 6px;
+    padding: 12px 10px;
     border-radius: 999px;
-    background: #FFFFFF;
-    border: 1.5px solid oklch(0.85 0.05 295);
-    color: #3B3550;
     font-family: 'Mulish', sans-serif;
-    font-size: 15px;
+    font-size: 13.5px;
     font-weight: 800;
+    text-decoration: none;
+    border: none;
     cursor: pointer;
+  }
+  #copy-link-btn {
+    background: #3B3550;
+    color: #FBF9F5;
+  }
+  #whatsapp-link-btn {
+    background: #E7F7EF;
+    color: #1E7A45;
   }
 </style>
 </head>
@@ -141,87 +186,52 @@
     <h1>¡Gracias! Tu <em>ritual de paz</em> ya te espera</h1>
     <p class="lead">Tu acceso está listo. Toca el botón para abrir tu eBook interactivo desde el celular o la computadora — no necesitas instalar nada.</p>
     <a class="cta" href="ritual.html">Comenzar mi ritual →</a>
-    <button id="pwa-install-button" class="install-btn">📲 Instalar en mi celular (opcional)</button>
-    <p id="pwa-hint" style="margin: -8px 0 0; font-size: 13px; color: #8B84A3;">💡 Se instala directo en Chrome. En otros navegadores, toca el botón y sigue los pasos.</p>
-    <p class="note">También te enviamos este enlace a tu correo junto con tu comprobante de compra, por si quieres volver otro día. Guárdalo en tus favoritos para tenerlo siempre a mano.</p>
-    <p class="verse">«En paz me acostaré, y asimismo dormiré; porque solo tú, Señor, me haces vivir confiado.»<span>Salmo 4:8</span></p>
-  </div>
 
-  <div id="pwa-manual-modal" style="display:none; position: fixed; inset:0; z-index:1000; background: rgba(0,0,0,0.5); align-items:flex-end; justify-content:center;">
-    <div style="background:#FBF9F5; border-radius: 20px 20px 0 0; padding: 24px 22px calc(24px + env(safe-area-inset-bottom)); max-width: 480px; width:100%; box-sizing: border-box; font-family:'Mulish', sans-serif; color:#3B3550;">
-      <p id="pwa-manual-title" style="margin:0 0 12px; font-weight:800; font-size:17px;">Para instalar:</p>
-      <div id="pwa-manual-steps" style="font-size:15px; line-height:1.6;"></div>
-      <a id="pwa-open-chrome" href="#" style="display:none; text-align:center; width:100%; box-sizing:border-box; padding:14px; border-radius:999px; background: oklch(0.5 0.11 295); color:#FFFDF8; font-weight:800; font-size:15px; text-decoration:none; margin-bottom:10px;">Abrir esta página en Chrome →</a>
-      <button id="pwa-manual-close" style="width:100%; margin-top:6px; padding:14px; border-radius:999px; background:#3B3550; color:#FBF9F5; border:none; font-weight:800; font-size:15px;">Entendido</button>
+    <div class="save-box">
+      <p class="title">📌 Guarda este enlace para volver cuando quieras</p>
+      <p class="sub">Cópialo y pégalo en tus notas, o mándatelo a tu propio WhatsApp. Así, cualquier día que quieras entrar, solo tocas el enlace de nuevo — sin tener que buscar nada.</p>
+      <div class="url-row">
+        <input id="ritual-url" type="text" readonly value="">
+      </div>
+      <div class="save-actions">
+        <button id="copy-link-btn" type="button">📋 Copiar enlace</button>
+        <a id="whatsapp-link-btn" href="#" target="_blank" rel="noopener">📱 Enviarme por WhatsApp</a>
+      </div>
+      <p id="copy-feedback" class="sub" style="display:none; color: oklch(0.5 0.11 295); font-weight: 700;">✓ ¡Enlace copiado!</p>
     </div>
+
+    <p class="note">También te enviamos este enlace a tu correo junto con tu comprobante de compra, por si prefieres buscarlo ahí.</p>
+    <p class="verse">«En paz me acostaré, y asimismo dormiré; porque solo tú, Señor, me haces vivir confiado.»<span>Salmo 4:8</span></p>
   </div>
 
   <script>
   (function () {
-    var button = document.getElementById('pwa-install-button');
-    var modal = document.getElementById('pwa-manual-modal');
-    var modalTitle = document.getElementById('pwa-manual-title');
-    var modalSteps = document.getElementById('pwa-manual-steps');
-    var modalClose = document.getElementById('pwa-manual-close');
-    var deferredPrompt = null;
+    var fullUrl = location.origin + location.pathname.replace(/gracias\.html$/, 'ritual.html');
+    var urlInput = document.getElementById('ritual-url');
+    var copyBtn = document.getElementById('copy-link-btn');
+    var waBtn = document.getElementById('whatsapp-link-btn');
+    var feedback = document.getElementById('copy-feedback');
 
-    var ua = navigator.userAgent;
-    var isIos = /iphone|ipad|ipod/i.test(ua) && !window.MSStream;
-    var isSamsung = /SamsungBrowser/i.test(ua);
-    var isAndroid = /android/i.test(ua);
-    var isChrome = /Chrome/i.test(ua) && !isSamsung && !/Edg|OPR|Firefox/i.test(ua);
-    var isStandalone = ('standalone' in window.navigator && window.navigator.standalone)
-      || window.matchMedia('(display-mode: standalone)').matches;
+    urlInput.value = fullUrl;
+    waBtn.href = 'https://wa.me/?text=' + encodeURIComponent('Mi ritual de 10 minutos para dormir en paz: ' + fullUrl);
 
-    if (isStandalone) { button.style.display = 'none'; }
-
-    var openChromeLink = document.getElementById('pwa-open-chrome');
-    if (isAndroid && !isChrome && openChromeLink) {
-      var intentUrl = 'intent://' + location.host + location.pathname
-        + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='
-        + encodeURIComponent('https://play.google.com/store/apps/details?id=com.android.chrome')
-        + ';end';
-      openChromeLink.href = intentUrl;
-    }
-
-    window.addEventListener('beforeinstallprompt', function (e) {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    function showManualSteps() {
-      if (isIos) {
-        modalTitle.textContent = 'Para instalar en tu iPhone:';
-        modalSteps.innerHTML = '<p style="margin:0 0 8px;">1. Toca el botón <strong>Compartir</strong> (el cuadrado con la flecha ↑) abajo en Safari.</p><p style="margin:0 0 18px;">2. Elige <strong>“Agregar a pantalla de inicio”</strong>.</p>';
-      } else if (isSamsung) {
-        modalTitle.textContent = 'Para instalar (navegador Samsung):';
-        modalSteps.innerHTML = '<p style="margin:0 0 8px;">1. Toca el ícono de <strong>menú</strong> (las tres líneas o tres puntos).</p><p style="margin:0 0 8px;">2. Elige <strong>“Añadir página a”</strong>.</p><p style="margin:0 0 18px;">3. Toca <strong>“Pantalla de Inicio”</strong>.</p>';
-      } else {
-        modalTitle.textContent = 'Para instalar:';
-        modalSteps.innerHTML = '<p style="margin:0 0 8px;">1. Toca el menú de tu navegador (los tres puntos, arriba o abajo).</p><p style="margin:0 0 18px;">2. Busca la opción <strong>“Agregar a pantalla de inicio”</strong> o <strong>“Instalar app”</strong>.</p>';
+    copyBtn.addEventListener('click', function () {
+      function showFeedback() {
+        feedback.style.display = 'block';
+        setTimeout(function () { feedback.style.display = 'none'; }, 2500);
       }
-      if (isAndroid && !isChrome && openChromeLink) {
-        openChromeLink.style.display = 'block';
-      }
-      modal.style.display = 'flex';
-    }
-
-    button.addEventListener('click', function () {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fullUrl).then(showFeedback).catch(function () {
+          urlInput.select();
+          document.execCommand('copy');
+          showFeedback();
+        });
       } else {
-        showManualSteps();
+        urlInput.select();
+        document.execCommand('copy');
+        showFeedback();
       }
     });
-
-    if (modalClose) {
-      modalClose.addEventListener('click', function () { modal.style.display = 'none'; });
-    }
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(function () {});
-    }
   })();
   </script>
 </body>

@@ -3,12 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3B3550">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Dormir en Paz">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -1153,95 +1147,31 @@ class Component extends DCLogic {
 }
 </script>
 
-<!-- BOTÓN INSTALAR EN EL CELULAR (fuera del bloque x-dc, no lo toca el render) -->
-<div id="pwa-install-btn" style="position: fixed; bottom: 18px; right: 18px; z-index: 999; display: none;">
-  <button id="pwa-install-button" style="display:flex; align-items:center; gap:8px; padding: 13px 20px; border-radius: 999px; background: #3B3550; color:#FBF9F5; border:none; font-family: 'Mulish', sans-serif; font-size:14.5px; font-weight:800; box-shadow: 0 8px 24px rgba(0,0,0,0.28); cursor:pointer;">
-    📲 Instalar app
+<!-- BOTÓN FLOTANTE COPIAR ENLACE (fuera del bloque x-dc, no lo toca el render) -->
+<div id="copy-link-float" style="position: fixed; bottom: 18px; right: 18px; z-index: 999;">
+  <button id="copy-link-float-btn" style="display:flex; align-items:center; gap:8px; padding: 12px 18px; border-radius: 999px; background: #3B3550; color:#FBF9F5; border:none; font-family: 'Mulish', sans-serif; font-size:13.5px; font-weight:800; box-shadow: 0 8px 24px rgba(0,0,0,0.28); cursor:pointer;">
+    📋 Copiar enlace
   </button>
 </div>
 
-<div id="pwa-manual-modal" style="display:none; position: fixed; inset:0; z-index:1000; background: rgba(0,0,0,0.5); align-items:flex-end; justify-content:center;">
-  <div style="background:#FBF9F5; border-radius: 20px 20px 0 0; padding: 24px 22px calc(24px + env(safe-area-inset-bottom)); max-width: 480px; width:100%; box-sizing: border-box; font-family:'Mulish', sans-serif; color:#3B3550;">
-    <p id="pwa-manual-title" style="margin:0 0 12px; font-weight:800; font-size:17px;">Para instalar:</p>
-    <div id="pwa-manual-steps" style="font-size:15px; line-height:1.6;"></div>
-    <a id="pwa-open-chrome" href="#" style="display:none; text-align:center; width:100%; box-sizing:border-box; padding:14px; border-radius:999px; background: oklch(0.5 0.11 295); color:#FFFDF8; font-weight:800; font-size:15px; text-decoration:none; margin-bottom:10px;">Abrir esta página en Chrome →</a>
-    <button id="pwa-manual-close" style="width:100%; margin-top:6px; padding:14px; border-radius:999px; background:#3B3550; color:#FBF9F5; border:none; font-weight:800; font-size:15px;">Entendido</button>
-  </div>
-</div>
-
 <script>
-(function(){
-  var btn = document.getElementById('pwa-install-btn');
-  var button = document.getElementById('pwa-install-button');
-  var modal = document.getElementById('pwa-manual-modal');
-  var modalTitle = document.getElementById('pwa-manual-title');
-  var modalSteps = document.getElementById('pwa-manual-steps');
-  var modalClose = document.getElementById('pwa-manual-close');
-  var deferredPrompt = null;
+(function () {
+  var btn = document.getElementById('copy-link-float-btn');
+  var fullUrl = location.href.split('#')[0].split('?')[0];
 
-  var ua = navigator.userAgent;
-  var isIos = /iphone|ipad|ipod/i.test(ua) && !window.MSStream;
-  var isSamsung = /SamsungBrowser/i.test(ua);
-  var isAndroid = /android/i.test(ua);
-  var isChrome = /Chrome/i.test(ua) && !isSamsung && !/Edg|OPR|Firefox/i.test(ua);
-  var isStandalone = ('standalone' in window.navigator && window.navigator.standalone)
-    || window.matchMedia('(display-mode: standalone)').matches;
-
-  var openChromeLink = document.getElementById('pwa-open-chrome');
-  if (isAndroid && !isChrome && openChromeLink) {
-    var intentUrl = 'intent://' + location.host + location.pathname
-      + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='
-      + encodeURIComponent('https://play.google.com/store/apps/details?id=com.android.chrome')
-      + ';end';
-    openChromeLink.href = intentUrl;
-  }
-
-  if (!isStandalone) {
-    btn.style.display = 'block';
-  }
-
-  window.addEventListener('beforeinstallprompt', function (e) {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (!isStandalone) btn.style.display = 'block';
-  });
-
-  function showManualSteps() {
-    if (isIos) {
-      modalTitle.textContent = 'Para instalar en tu iPhone:';
-      modalSteps.innerHTML = '<p style="margin:0 0 8px;">1. Toca el botón <strong>Compartir</strong> (el cuadrado con la flecha ↑) abajo en Safari.</p><p style="margin:0 0 18px;">2. Elige <strong>“Agregar a pantalla de inicio”</strong>.</p>';
-    } else if (isSamsung) {
-      modalTitle.textContent = 'Para instalar (navegador Samsung):';
-      modalSteps.innerHTML = '<p style="margin:0 0 8px;">1. Toca el ícono de <strong>menú</strong> (las tres líneas o tres puntos).</p><p style="margin:0 0 8px;">2. Elige <strong>“Añadir página a”</strong>.</p><p style="margin:0 0 18px;">3. Toca <strong>“Pantalla de Inicio”</strong>.</p>';
-    } else {
-      modalTitle.textContent = 'Para instalar:';
-      modalSteps.innerHTML = '<p style="margin:0 0 8px;">1. Toca el menú de tu navegador (los tres puntos, arriba o abajo).</p><p style="margin:0 0 18px;">2. Busca la opción <strong>“Agregar a pantalla de inicio”</strong> o <strong>“Instalar app”</strong>.</p>';
+  btn.addEventListener('click', function () {
+    function done() {
+      btn.textContent = '✓ ¡Copiado!';
+      setTimeout(function () { btn.innerHTML = '📋 Copiar enlace'; }, 2000);
     }
-    if (isAndroid && !isChrome && openChromeLink) {
-      openChromeLink.style.display = 'block';
-    }
-    modal.style.display = 'flex';
-  }
-
-  button.addEventListener('click', function () {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function () {
-        deferredPrompt = null;
-        btn.style.display = 'none';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullUrl).then(done).catch(function () {
+        prompt('Copia este enlace:', fullUrl);
       });
     } else {
-      showManualSteps();
+      prompt('Copia este enlace:', fullUrl);
     }
   });
-
-  if (modalClose) {
-    modalClose.addEventListener('click', function () { modal.style.display = 'none'; });
-  }
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(function () {});
-  }
 })();
 </script>
 </body>
