@@ -1147,32 +1147,7 @@ class Component extends DCLogic {
 }
 </script>
 
-<!-- BOTÓN FLOTANTE COPIAR ENLACE (fuera del bloque x-dc, no lo toca el render) -->
-<div id="copy-link-float" style="position: fixed; bottom: 18px; right: 18px; z-index: 999;">
-  <button id="copy-link-float-btn" style="display:flex; align-items:center; gap:8px; padding: 12px 18px; border-radius: 999px; background: #3B3550; color:#FBF9F5; border:none; font-family: 'Mulish', sans-serif; font-size:13.5px; font-weight:800; box-shadow: 0 8px 24px rgba(0,0,0,0.28); cursor:pointer;">
-    📋 Copiar enlace
-  </button>
-</div>
+<!-- BOTÓN FLOTANTE COPIAR ENLACE: quitado a pedido, resultaba molesto dentro del ritual -->
 
-<script>
-(function () {
-  var btn = document.getElementById('copy-link-float-btn');
-  var fullUrl = location.href.split('#')[0].split('?')[0];
-
-  btn.addEventListener('click', function () {
-    function done() {
-      btn.textContent = '✓ ¡Copiado!';
-      setTimeout(function () { btn.innerHTML = '📋 Copiar enlace'; }, 2000);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(fullUrl).then(done).catch(function () {
-        prompt('Copia este enlace:', fullUrl);
-      });
-    } else {
-      prompt('Copia este enlace:', fullUrl);
-    }
-  });
-})();
-</script>
 </body>
 </html>
