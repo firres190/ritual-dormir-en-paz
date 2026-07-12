@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg, #FBF9F5); }
+  body { font-family: 'Mulish', sans-serif; color: var(--ink, #3B3550); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accentink, oklch(0.5 0.11 295)); text-decoration: none; }
+  a:hover { color: oklch(0.4 0.11 295); }
+  ::selection { background: oklch(0.9 0.05 295); }
+  @keyframes glowPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @media print { header, footer, [data-noprint] { display: none !important; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: var(--bg, #FBF9F5); display: flex; flex-direction: column;">
+
+  <!-- ===== HEADER ===== -->
+  <header style="position: sticky; top: 0; z-index: 50; background: var(--headerbg, rgba(251,249,245,0.92)); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border, oklch(0.93 0.015 295));">
+    <div style="max-width: 880px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+      <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, oklch(0.97 0.02 295), oklch(0.85 0.06 295)); display: flex; align-items: center; justify-content: center; color: var(--accentink, oklch(0.5 0.11 295)); font-size: 15px; box-shadow: 0 2px 10px oklch(0.85 0.06 295 / 0.5);">✦</div>
+        <div style="display: flex; flex-direction: column;">
+          <span style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 18px; line-height: 1;">Dormir en Paz</span>
+          <span style="font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted2, #8B84A3);">Sanación angelical</span>
+        </div>
+      </div>
+      <nav style="display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px;">
+        <button onClick="{{ goHome }}" style="{{ navHomeStyle }}">Inicio</button>
+        <button onClick="{{ goIndex }}" style="{{ navIndexStyle }}">Ritual</button>
+        <button onClick="{{ goJournal }}" style="{{ navJournalStyle }}">Diario</button>
+        <button onClick="{{ goResources }}" style="{{ navResourcesStyle }}">Recursos</button>
+        <button onClick="{{ goProfile }}" style="{{ navProfileStyle }}">Mi camino</button>
+        <button onClick="{{ toggleNight }}" title="Modo noche" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); background: var(--surface, #FFFFFF); cursor: pointer; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; font-size: 15px; color: var(--accentink, oklch(0.5 0.11 295)); display: flex; align-items: center; justify-content: center; padding: 0;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">{{ nightIcon }}</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HOME ===== -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <main data-screen-label="Portada" style="flex: 1;">
+      <section style="position: relative; overflow: hidden; text-align: center; padding: clamp(56px, 9vw, 110px) 24px 64px;">
+        <div style="position: absolute; top: -140px; left: 50%; transform: translateX(-50%); width: 640px; height: 480px; background: radial-gradient(ellipse at center, oklch(0.93 0.045 295 / 0.9), oklch(0.95 0.03 85 / 0.4) 55%, transparent 75%); animation: glowPulse 6s ease-in-out infinite; pointer-events: none;"></div>
+        <div style="position: relative; max-width: 660px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 22px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 999px; background: var(--surface, #FFFFFF); border: 1px solid var(--border2, oklch(0.9 0.03 295)); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accentink, oklch(0.5 0.11 295));">✦ eBook didáctico · 35 capítulos</div>
+          <h1 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(38px, 6vw, 62px); line-height: 1.08; letter-spacing: -0.01em;">Ritual de 10 minutos para <em style="color: var(--accentink, oklch(0.5 0.11 295));">dormir en paz</em></h1>
+          <p style="margin: 0; max-width: 520px; font-size: clamp(16px, 2vw, 18px); line-height: 1.65; color: var(--muted, #6B6485);">Un camino guiado de lectura, respiración y oración con la sanación angelical, para entregar cada noche al descanso que Dios promete.</p>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 6px;">
+            <button onClick="{{ startRitual }}" style="border: none; cursor: pointer; padding: 15px 30px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700; box-shadow: 0 8px 24px oklch(0.5 0.11 295 / 0.28);" style-hover="background: oklch(0.44 0.11 295)">{{ ctaLabel }}</button>
+            <button onClick="{{ goIndex }}" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); cursor: pointer; padding: 15px 26px; border-radius: 999px; background: var(--surface, #FFFFFF); color: var(--accentink, oklch(0.45 0.11 295)); font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">Ver los capítulos</button>
+          </div>
+          <div style="width: 100%; max-width: 640px; height: clamp(200px, 34vw, 320px); margin-top: 20px;">
+            <img src="images/portada.jpg" alt="Portada" style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px; display: block;" />
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width: 880px; margin: 0 auto; padding: 0 20px 40px;">
+        <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 22px; padding: clamp(24px, 4vw, 36px); text-align: center; box-shadow: 0 4px 24px oklch(0.85 0.04 295 / 0.12);">
+          <p style="margin: 0 0 8px; font-size: 11.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Versículo de la noche</p>
+          <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(20px, 3vw, 26px); line-height: 1.45;">«En paz me acostaré, y asimismo dormiré; porque solo tú, Señor, me haces vivir confiado.»</p>
+          <p style="margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--muted2, #8B84A3);">Salmo 4:8</p>
+        </div>
+      </section>
+
+      <section style="max-width: 880px; margin: 0 auto; padding: 8px 20px 72px;">
+        <h2 style="margin: 0 0 20px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 28px; text-align: center;">Así funciona tu ritual</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--chipbg, oklch(0.95 0.025 295)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accentink, oklch(0.5 0.11 295));">1</div>
+            <strong style="font-size: 16px;">Lee · 4 minutos</strong>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--muted, #6B6485);">Una lectura breve con un versículo que prepara tu corazón para la noche.</p>
+          </div>
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--chipbg, oklch(0.95 0.025 295)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accentink, oklch(0.5 0.11 295));">2</div>
+            <strong style="font-size: 16px;">Practica · 4 minutos</strong>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--muted, #6B6485);">Un ejercicio guiado de respiración o visualización con luz angelical.</p>
+          </div>
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--chipbg, oklch(0.95 0.025 295)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accentink, oklch(0.5 0.11 295));">3</div>
+            <strong style="font-size: 16px;">Ora · 2 minutos</strong>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--muted, #6B6485);">Una oración de entrega y una pequeña actividad para afianzar lo aprendido.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width: 880px; margin: 0 auto; padding: 0 20px 72px;">
+        <div onClick="{{ goJournal }}" style="cursor: pointer; background: var(--wash, linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.025 85))); border: 1px solid var(--border, oklch(0.92 0.03 295)); border-radius: 22px; padding: clamp(24px, 4vw, 34px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; transition: box-shadow 0.2s;" style-hover="box-shadow: 0 12px 32px oklch(0.8 0.05 295 / 0.25)">
+          <div style="display: flex; flex-direction: column; gap: 6px; min-width: 240px;">
+            <p style="margin: 0; font-size: 11.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">✦ Nueva sección</p>
+            <strong style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(22px, 3vw, 28px); line-height: 1.2;">Diario espiritual de 14 días</strong>
+            <span style="font-size: 15px; line-height: 1.6; color: var(--muted, #6B6485);">Ora, reconoce tus emociones y camina en la presencia de Dios, un día a la vez.</span>
+          </div>
+          <span style="flex-shrink: 0; padding: 13px 24px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-size: 14.5px; font-weight: 700; box-shadow: 0 8px 24px oklch(0.5 0.11 295 / 0.25);">Abrir el diario →</span>
+        </div>
+      </section>
+    </main>
+  </sc-if>
+
+  <!-- ===== INDEX ===== -->
+  <sc-if value="{{ isIndex }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Indice de capitulos" style="flex: 1; max-width: 880px; width: 100%; margin: 0 auto; padding: 40px 20px 72px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 12px;">
+        <div>
+          <p style="margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">El ritual completo</p>
+          <h1 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 4.5vw, 42px);">Treinta y cinco noches hacia la paz</h1>
+        </div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295)); background: var(--chipbg, oklch(0.95 0.025 295)); padding: 8px 16px; border-radius: 999px;">{{ doneCount }} de {{ total }} completados</div>
+      </div>
+      <div style="height: 6px; border-radius: 999px; background: var(--border, oklch(0.93 0.02 295)); margin-bottom: 28px; overflow: hidden;">
+        <div style="{{ progressBarStyle }}"></div>
+      </div>
+      <sc-for list="{{ partGroups }}" as="pg" hint-placeholder-count="5">
+        <div style="margin-bottom: 36px;">
+          <h2 style="margin: 0 0 14px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 24px;">{{ pg.name }}</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;">
+          <sc-for list="{{ pg.cards }}" as="ch" hint-placeholder-count="7">
+          <div onClick="{{ ch.open }}" style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 20px; cursor: pointer; display: flex; gap: 14px; align-items: flex-start; transition: box-shadow 0.2s, transform 0.2s;" style-hover="box-shadow: 0 10px 28px oklch(0.8 0.05 295 / 0.2); transform: translateY(-2px)">
+            <div style="{{ ch.numStyle }}">{{ ch.numLabel }}</div>
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <strong style="font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; line-height: 1.2;">{{ ch.title }}</strong>
+              <span style="font-size: 13.5px; line-height: 1.5; color: var(--muted2, #8B84A3);">{{ ch.sub }}</span>
+              <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85)); margin-top: 4px;">{{ ch.meta }}</span>
+            </div>
+          </div>
+          </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </main>
+  </sc-if>
+
+  <!-- ===== READER ===== -->
+  <sc-if value="{{ isReader }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Vista de lectura" style="flex: 1; max-width: 720px; width: 100%; margin: 0 auto; padding: 32px 20px 80px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px;">
+        <button onClick="{{ goIndex }}" style="border: none; background: none; cursor: pointer; font-family: 'Mulish', sans-serif; font-size: 14px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295)); padding: 8px 12px 8px 0; display: flex; align-items: center; gap: 6px;">← Índice</button>
+        <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2, #8B84A3);">Capítulo {{ cur.n }} de {{ total }} · {{ cur.min }}</span>
+      </div>
+
+      <p style="margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">{{ cur.kicker }}</p>
+      <h1 style="margin: 0 0 10px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1;">{{ cur.title }}</h1>
+      <p style="margin: 0 0 28px; font-size: 16.5px; line-height: 1.6; color: var(--muted, #6B6485);">{{ cur.sub }}</p>
+
+      <div style="width: 100%; height: clamp(180px, 32vw, 300px); margin-bottom: 28px;">
+        <img src="images/cap{{ cur.n }}.jpg" alt="Capítulo {{ cur.n }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; display: block;" />
+      </div>
+
+      <sc-if value="{{ showVerse }}" hint-placeholder-val="{{ true }}">
+        <div style="background: var(--wash, linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.02 85))); border: 1px solid var(--border, oklch(0.92 0.03 295)); border-radius: 20px; padding: 26px 28px; margin-bottom: 28px; text-align: center;">
+          <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 21px; line-height: 1.5;">«{{ cur.verse }}»</p>
+          <p style="margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295));">{{ cur.ref }}</p>
+        </div>
+      </sc-if>
+
+      <div style="font-size: 17px; line-height: 1.85; display: flex; flex-direction: column; gap: 18px;">
+        <p style="margin: 0; text-wrap: pretty;">{{ cur.p1 }}</p>
+        <p style="margin: 0; text-wrap: pretty;">{{ cur.p2 }}</p>
+        <p style="margin: 0; text-wrap: pretty;">{{ cur.p3 }}</p>
+      </div>
+
+      <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 20px; padding: 24px 26px; margin-top: 30px; display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Para reflexionar</span>
+        <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.5;">{{ cur.reflect }}</p>
+      </div>
+
+      <div style="background: oklch(0.35 0.06 295); color: oklch(0.97 0.01 295); border-radius: 20px; padding: 26px 28px; margin-top: 18px; display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: oklch(0.8 0.08 85);">✦ Oración de la noche</span>
+        <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; line-height: 1.6;">{{ cur.prayer }}</p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px;">
+        <button onClick="{{ startQuiz }}" style="flex: 1; min-width: 220px; border: none; cursor: pointer; padding: 16px 24px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700; box-shadow: 0 8px 24px oklch(0.5 0.11 295 / 0.25);" style-hover="background: oklch(0.44 0.11 295)">Hacer la actividad del capítulo</button>
+        <button onClick="{{ nextCh }}" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); cursor: pointer; padding: 16px 24px; border-radius: 999px; background: var(--surface, #FFFFFF); color: var(--accentink, oklch(0.45 0.11 295)); font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">{{ nextLabel }}</button>
+      </div>
+    </main>
+  </sc-if>
+
+  <!-- ===== QUIZ ===== -->
+  <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Actividad" style="flex: 1; max-width: 640px; width: 100%; margin: 0 auto; padding: 36px 20px 80px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px;">
+        <button onClick="{{ backToReader }}" style="border: none; background: none; cursor: pointer; font-family: 'Mulish', sans-serif; font-size: 14px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295)); padding: 8px 12px 8px 0;">← Volver a la lectura</button>
+        <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2, #8B84A3);">{{ quizMeta }}</span>
+      </div>
+
+      <sc-if value="{{ quizActive }}" hint-placeholder-val="{{ true }}">
+        <p style="margin: 0 0 8px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Actividad · Capítulo {{ cur.n }}</p>
+        <h1 style="margin: 0 0 26px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(24px, 4vw, 32px); line-height: 1.25;">{{ quizQuestion }}</h1>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <sc-for list="{{ quizOptions }}" as="opt" hint-placeholder-count="3">
+            <div onClick="{{ opt.pick }}" style="{{ opt.style }}">
+              <span>{{ opt.label }}</span>
+              <span style="font-weight: 800;">{{ opt.mark }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ quizAnswered }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 20px; background: var(--wash, linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.02 85))); border: 1px solid var(--border, oklch(0.92 0.03 295)); border-radius: 16px; padding: 18px 22px; font-size: 15px; line-height: 1.6; color: var(--muted, #55506E);">{{ quizExplain }}</div>
+          <button onClick="{{ quizNext }}" style="margin-top: 18px; width: 100%; border: none; cursor: pointer; padding: 16px 24px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700;" style-hover="background: oklch(0.44 0.11 295)">{{ quizNextLabel }}</button>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ quizFinished }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align: center; padding: 24px 0 8px; display: flex; flex-direction: column; align-items: center; gap: 18px;">
+          <div style="width: 88px; height: 88px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, oklch(0.97 0.02 295), oklch(0.85 0.06 295)); display: flex; align-items: center; justify-content: center; font-size: 34px; color: var(--accentink, oklch(0.5 0.11 295)); box-shadow: 0 8px 30px oklch(0.85 0.06 295 / 0.6);">✦</div>
+          <h1 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 4.5vw, 38px);">Capítulo completado</h1>
+          <p style="margin: 0; font-size: 17px; color: var(--muted, #6B6485);">Acertaste {{ quizScore }} de {{ quizTotal }} preguntas. Que la paz del Señor acompañe tu descanso esta noche.</p>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px;">
+            <button onClick="{{ finishChapter }}" style="border: none; cursor: pointer; padding: 15px 28px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700; box-shadow: 0 8px 24px oklch(0.5 0.11 295 / 0.25);" style-hover="background: oklch(0.44 0.11 295)">{{ finishLabel }}</button>
+            <button onClick="{{ goProfile }}" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); cursor: pointer; padding: 15px 26px; border-radius: 999px; background: var(--surface, #FFFFFF); color: var(--accentink, oklch(0.45 0.11 295)); font-family: 'Mulish', sans-serif; font-size: 15.5px; font-weight: 700;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">Ver mi camino</button>
+          </div>
+        </div>
+      </sc-if>
+    </main>
+  </sc-if>
+
+  <!-- ===== JOURNAL INDEX ===== -->
+  <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Diario espiritual" style="flex: 1; max-width: 880px; width: 100%; margin: 0 auto; padding: 40px 20px 72px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 12px;">
+        <div>
+          <p style="margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Diario espiritual</p>
+          <h1 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 4.5vw, 42px);">Catorce días en su presencia</h1>
+        </div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--goldink, oklch(0.55 0.09 85)); background: var(--goldwash, oklch(0.96 0.03 85)); padding: 8px 16px; border-radius: 999px;">{{ journalDoneCount }} de 14 escritos</div>
+        <button data-noprint="1" onClick="{{ exportDiary }}" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); cursor: pointer; padding: 10px 20px; border-radius: 999px; background: var(--surface, #FFFFFF); color: var(--accentink, oklch(0.45 0.11 295)); font-family: 'Mulish', sans-serif; font-size: 13.5px; font-weight: 700;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">Descargar mi diario ↓</button>
+      </div>
+      <p style="margin: 0 0 28px; max-width: 620px; font-size: 16px; line-height: 1.65; color: var(--muted, #6B6485);">Un cuaderno guiado para orar, reconocer tus emociones y caminar en la presencia de Dios. Cada día: un versículo, tu corazón y una página en blanco. Todo lo que escribas se guarda en este dispositivo.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;">
+        <sc-for list="{{ journalCards }}" as="d" hint-placeholder-count="14">
+          <div onClick="{{ d.open }}" style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 20px; cursor: pointer; display: flex; gap: 14px; align-items: flex-start; transition: box-shadow 0.2s, transform 0.2s;" style-hover="box-shadow: 0 10px 28px oklch(0.8 0.05 295 / 0.2); transform: translateY(-2px)">
+            <div style="{{ d.numStyle }}">{{ d.numLabel }}</div>
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <strong style="font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; line-height: 1.2;">{{ d.title }}</strong>
+              <span style="font-size: 13.5px; line-height: 1.5; color: var(--muted2, #8B84A3);">{{ d.focus }}</span>
+              <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85)); margin-top: 4px;">{{ d.status }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </main>
+  </sc-if>
+
+  <!-- ===== JOURNAL DAY ===== -->
+  <sc-if value="{{ isJournalDay }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Diario - dia" style="flex: 1; max-width: 720px; width: 100%; margin: 0 auto; padding: 32px 20px 80px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 28px;">
+        <button onClick="{{ backToJournal }}" style="border: none; background: none; cursor: pointer; font-family: 'Mulish', sans-serif; font-size: 14px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295)); padding: 8px 12px 8px 0; display: flex; align-items: center; gap: 6px;">← Diario</button>
+        <span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted2, #8B84A3);">Día {{ jd.n }} de 14</span>
+      </div>
+
+      <p style="margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Diario espiritual</p>
+      <h1 style="margin: 0 0 10px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1;">{{ jd.t }}</h1>
+      <p style="margin: 0 0 28px; font-size: 16.5px; line-height: 1.6; color: var(--muted, #6B6485);">{{ jd.f }}</p>
+
+      <div style="background: var(--wash, linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.02 85))); border: 1px solid var(--border, oklch(0.92 0.03 295)); border-radius: 20px; padding: 26px 28px; margin-bottom: 28px; text-align: center;">
+        <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 21px; line-height: 1.5;">«{{ jd.verse }}»</p>
+        <p style="margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295));">{{ jd.ref }}</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px;">
+        <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">¿Cómo está tu corazón hoy?</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <sc-for list="{{ jMoodChips }}" as="chip" hint-placeholder-count="8">
+            <div onClick="{{ chip.pick }}" style="{{ chip.style }}">{{ chip.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 20px; padding: 24px 26px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Para escribir</span>
+        <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.5;">{{ jd.q }}</p>
+        <textarea value="{{ jText }}" onChange="{{ jTextChange }}" placeholder="Escríbele a Dios aquí…" style="width: 100%; box-sizing: border-box; min-height: 200px; resize: vertical; border: 1.5px solid var(--border, oklch(0.92 0.02 295)); border-radius: 14px; padding: 16px 18px; font-family: 'Mulish', sans-serif; font-size: 15.5px; line-height: 1.7; color: var(--ink, #3B3550); background: var(--bg, #FBF9F5); outline: none;"></textarea>
+        <span style="font-size: 12.5px; font-weight: 600; color: var(--muted2, #8B84A3);">✦ Se guarda automáticamente en este dispositivo</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; gap: 12px; margin-top: 28px;">
+        <button onClick="{{ jPrev }}" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); cursor: pointer; padding: 14px 22px; border-radius: 999px; background: var(--surface, #FFFFFF); color: var(--accentink, oklch(0.45 0.11 295)); font-family: 'Mulish', sans-serif; font-size: 14.5px; font-weight: 700;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">← Día anterior</button>
+        <button onClick="{{ jNext }}" style="border: none; cursor: pointer; padding: 14px 22px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-family: 'Mulish', sans-serif; font-size: 14.5px; font-weight: 700; box-shadow: 0 8px 24px oklch(0.5 0.11 295 / 0.25);" style-hover="background: oklch(0.44 0.11 295)">Día siguiente →</button>
+      </div>
+    </main>
+  </sc-if>
+
+  <!-- ===== RESOURCES ===== -->
+  <sc-if value="{{ isResources }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Recursos" style="flex: 1; max-width: 880px; width: 100%; margin: 0 auto; padding: 40px 20px 72px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <div data-noprint="1">
+        <p style="margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Recursos</p>
+        <h1 style="margin: 0 0 28px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 4.5vw, 42px);">Auxilios para la noche</h1>
+
+        <h2 style="margin: 0 0 6px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px;">Oraciones de emergencia</h2>
+        <p style="margin: 0 0 18px; font-size: 15.5px; line-height: 1.6; color: var(--muted, #6B6485);">Para tenerlas a mano cuando la noche se complica.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+          <sc-for list="{{ emergencyPrayers }}" as="ep" hint-placeholder-count="8">
+            <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+              <span style="font-size: 11.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">✦ {{ ep.tag }}</span>
+              <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.6;">{{ ep.text }}</p>
+              <span style="font-size: 12.5px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295));">{{ ep.ref }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px; margin: 44px 0 18px;">
+        <div>
+          <h2 style="margin: 0 0 6px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px;">Tarjetas de versículos</h2>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--muted, #6B6485);">Las treinta y cinco palabras de paz del ritual, listas para imprimir o guardar.</p>
+        </div>
+        <button data-noprint="1" onClick="{{ printPage }}" style="border: 1.5px solid var(--border3, oklch(0.85 0.05 295)); cursor: pointer; padding: 12px 22px; border-radius: 999px; background: var(--surface, #FFFFFF); color: var(--accentink, oklch(0.45 0.11 295)); font-family: 'Mulish', sans-serif; font-size: 14px; font-weight: 700;" style-hover="background: var(--hover, oklch(0.97 0.015 295))">Imprimir tarjetas</button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
+        <sc-for list="{{ verseCards }}" as="v" hint-placeholder-count="12">
+          <div style="background: var(--wash, linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.02 85))); border: 1px solid var(--border, oklch(0.92 0.03 295)); border-radius: 18px; padding: 26px 24px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.16em; color: var(--goldink2, oklch(0.6 0.09 85));">✦ {{ v.n }}</span>
+            <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.5;">«{{ v.verse }}»</p>
+            <span style="font-size: 12.5px; font-weight: 700; color: var(--accentink, oklch(0.5 0.11 295));">{{ v.ref }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </main>
+  </sc-if>
+
+  <!-- ===== PROFILE ===== -->
+  <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+    <main data-screen-label="Mi camino" style="flex: 1; max-width: 880px; width: 100%; margin: 0 auto; padding: 40px 20px 72px; box-sizing: border-box; animation: fadeUp 0.4s ease;">
+      <p style="margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Tu progreso</p>
+      <h1 style="margin: 0 0 28px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 4.5vw, 42px);">El camino de {{ userName }}</h1>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; align-items: stretch;">
+        <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 22px; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+          <div style="{{ ringStyle }}">
+            <div style="position: absolute; inset: 10px; border-radius: 50%; background: var(--surface, #FFFFFF); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+              <span style="font-size: 30px; font-weight: 800; color: var(--accentink, oklch(0.45 0.11 295));">{{ pctLabel }}</span>
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted2, #8B84A3);">del ritual</span>
+            </div>
+          </div>
+          <p style="margin: 0; font-size: 14.5px; text-align: center; color: var(--muted, #6B6485);">{{ encouragement }}</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 4px; justify-content: center;">
+            <span style="font-size: 28px; font-weight: 800; color: var(--accentink, oklch(0.45 0.11 295));">{{ doneCount }}</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--muted2, #8B84A3);">Capítulos completados</span>
+          </div>
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 4px; justify-content: center;">
+            <span style="font-size: 28px; font-weight: 800; color: var(--accentink, oklch(0.45 0.11 295));">{{ minutesLabel }}</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--muted2, #8B84A3);">Minutos de paz</span>
+          </div>
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 4px; justify-content: center;">
+            <span style="font-size: 28px; font-weight: 800; color: var(--accentink, oklch(0.45 0.11 295));">{{ versesCount }}</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--muted2, #8B84A3);">Versículos aprendidos</span>
+          </div>
+          <div style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 4px; justify-content: center;">
+            <span style="font-size: 28px; font-weight: 800; color: var(--accentink, oklch(0.45 0.11 295));">{{ remainingCount }}</span>
+            <span style="font-size: 13px; font-weight: 700; color: var(--muted2, #8B84A3);">Noches por delante</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="margin: 36px 0 16px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 26px;">Capítulo a capítulo</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <sc-for list="{{ chapterCards }}" as="ch" hint-placeholder-count="12">
+          <div onClick="{{ ch.open }}" style="background: var(--surface, #FFFFFF); border: 1px solid var(--border, oklch(0.93 0.02 295)); border-radius: 14px; padding: 14px 18px; cursor: pointer; display: flex; align-items: center; gap: 14px;" style-hover="background: var(--hover, oklch(0.98 0.008 295))">
+            <div style="{{ ch.numStyle }}">{{ ch.numLabel }}</div>
+            <span style="flex: 1; font-size: 15px; font-weight: 600;">{{ ch.title }}</span>
+            <span style="font-size: 12.5px; font-weight: 700; color: var(--muted2, #8B84A3);">{{ ch.status }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ certDone }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 40px; background: var(--wash, linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.02 85))); border: 1px solid var(--border3, oklch(0.85 0.05 295)); border-radius: 26px; padding: clamp(32px, 5vw, 56px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px;">
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, oklch(0.97 0.02 295), oklch(0.85 0.06 295)); display: flex; align-items: center; justify-content: center; font-size: 28px; color: oklch(0.5 0.11 295); box-shadow: 0 8px 30px oklch(0.85 0.06 295 / 0.6);">✦</div>
+          <p style="margin: 0; font-size: 12px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--goldink2, oklch(0.6 0.09 85));">Certificado de paz</p>
+          <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 4vw, 40px); line-height: 1.1;">{{ userName }}</h2>
+          <p style="margin: 0; max-width: 520px; font-size: 16.5px; line-height: 1.65; color: var(--muted, #6B6485);">ha completado el Ritual de 10 Minutos para Dormir en Paz con la Sanación Angelical: treinta y cinco capítulos, treinta y cinco noches entregadas al descanso de Dios.</p>
+          <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; line-height: 1.5;">«En paz me acostaré, y asimismo dormiré.» — Salmo 4:8</p>
+          <p style="margin: 0; font-size: 13px; font-weight: 700; color: var(--muted2, #8B84A3);">{{ certDate }}</p>
+          <button data-noprint="1" onClick="{{ printPage }}" style="margin-top: 6px; border: none; cursor: pointer; padding: 14px 26px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-family: 'Mulish', sans-serif; font-size: 14.5px; font-weight: 700; box-shadow: 0 8px 24px oklch(0.5 0.11 295 / 0.25);" style-hover="background: oklch(0.44 0.11 295)">Imprimir mi certificado</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ certPending }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top: 40px; border: 1.5px dashed var(--border3, oklch(0.85 0.05 295)); border-radius: 26px; padding: 30px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+          <span style="font-size: 22px; color: var(--goldink2, oklch(0.6 0.09 85));">✦</span>
+          <strong style="font-size: 16px;">Tu certificado de paz te espera</strong>
+          <span style="font-size: 14.5px; line-height: 1.6; color: var(--muted, #6B6485);">Completa los {{ total }} capítulos del ritual para recibirlo. Llevas {{ doneCount }} de {{ total }}.</span>
+        </div>
+      </sc-if>
+    </main>
+  </sc-if>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="border-top: 1px solid var(--border, oklch(0.93 0.015 295)); padding: 22px 20px; text-align: center; font-size: 13px; color: var(--muted2, #8B84A3);">
+    ✦ Dormir en Paz · Ritual de 10 minutos con la sanación angelical · Maqueta didáctica
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;nombreUsuario&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;tu alma&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Contenido&quot; },
+  &quot;mostrarVersiculos&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Contenido&quot; },
+  &quot;pantallaInicial&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;home&quot;, &quot;index&quot;, &quot;reader&quot;, &quot;quiz&quot;, &quot;profile&quot;], &quot;default&quot;: &quot;home&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Navegación&quot; }
+}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('ritual-angelical-v1') || '{}'); } catch (e) {}
+    let jsaved = {};
+    try { jsaved = JSON.parse(localStorage.getItem('ritual-diario-v1') || '{}'); } catch (e) {}
+    if (!jsaved || typeof jsaved !== 'object') jsaved = {};
+    let night = false;
+    try { night = localStorage.getItem('ritual-noche-v1') === '1'; } catch (e) {}
+    this.state = {
+      screen: this.props.pantallaInicial || 'home',
+      ch: 0,
+      completed: Array.isArray(saved.completed) ? saved.completed : [],
+      quizIdx: 0,
+      quizSel: null,
+      quizScore: 0,
+      quizFinished: false,
+      jDay: 0,
+      jEntries: jsaved,
+      night
+    };
+    this.days = [
+      { t: 'Llego como estoy', f: 'Presentarte ante Dios sin máscaras.', verse: 'Examíname, oh Dios, y conoce mi corazón', ref: 'Salmo 139:23', q: '¿Cómo llegas hoy ante Dios? Cuéntaselo sin filtros, como a un amigo.' },
+      { t: 'Nombro lo que siento', f: 'Las emociones son mensajeras, no enemigas.', verse: 'De la abundancia del corazón habla la boca', ref: 'Lucas 6:45', q: '¿Qué emoción visitó hoy tu corazón? ¿Qué crees que viene a decirte?' },
+      { t: 'Doy gracias', f: 'La gratitud abre los ojos del alma.', verse: 'Dad gracias en todo, porque esta es la voluntad de Dios', ref: '1 Tesalonicenses 5:18', q: '¿Qué tres regalos de hoy no quieres olvidar? Descríbelos con detalle.' },
+      { t: 'Dios en lo pequeño', f: 'Su presencia se esconde en lo cotidiano.', verse: 'En él vivimos, y nos movemos, y somos', ref: 'Hechos 17:28', q: '¿En qué momento sencillo de hoy pudo estar Dios presente sin que lo notaras?' },
+      { t: 'Miro mis miedos', f: 'El miedo pierde fuerza cuando se nombra ante Dios.', verse: 'Cuando estoy con miedo, en ti confío', ref: 'Salmo 56:3', q: '¿Qué temor cargas estos días? Escríbelo y entrégaselo palabra por palabra.' },
+      { t: 'Suelto y perdono', f: 'Perdonar es abrir la mano.', verse: 'Sed benignos unos con otros, perdonándoos unos a otros', ref: 'Efesios 4:32', q: '¿Hay algo o alguien que necesites perdonar, incluso a ti mismo? ¿Qué le dirías?' },
+      { t: 'Descanso en Él', f: 'Cierre de la primera semana: reposo.', verse: 'Él da a su amado el sueño', ref: 'Salmo 127:2', q: 'Mira tu semana: ¿dónde viste la mano de Dios? ¿Qué quieres agradecerle?' },
+      { t: 'Aprendo a escuchar', f: 'La oración también es silencio.', verse: 'Habla, Señor, que tu siervo escucha', ref: '1 Samuel 3:9', q: 'Quédate dos minutos en silencio antes de escribir. ¿Qué surgió en ese silencio?' },
+      { t: 'Una palabra para mí', f: 'Dejar que la Escritura me lea.', verse: 'Lámpara es a mis pies tu palabra', ref: 'Salmo 119:105', q: 'Elige un versículo de este libro que te haya tocado. ¿Por qué crees que te alcanzó hoy?' },
+      { t: 'Mi cuerpo también ora', f: 'Habitar el cuerpo con gratitud.', verse: '¿No sabéis que vuestro cuerpo es templo del Espíritu Santo?', ref: '1 Corintios 6:19', q: '¿Qué te dice hoy tu cuerpo: cansancio, tensión, energía? ¿Qué le pedirías a Dios para él?' },
+      { t: 'Oro por otros', f: 'La intercesión ensancha el corazón.', verse: 'Orad unos por otros', ref: 'Santiago 5:16', q: '¿Quién necesita hoy tu oración? Escribe sus nombres y lo que pides para cada uno.' },
+      { t: 'Suelto el control', f: 'Confiar más, controlar menos.', verse: 'Encomienda a Jehová tu camino, y confía en él', ref: 'Salmo 37:5', q: '¿Qué situación intentas controlar y no puedes? ¿Cómo sería entregarla de verdad?' },
+      { t: 'Alabo en la noche', f: 'La alabanza cambia la atmósfera del alma.', verse: 'Bendice, alma mía, a Jehová', ref: 'Salmo 103:1', q: 'Escríbele a Dios una pequeña alabanza con tus propias palabras, sin pedir nada.' },
+      { t: 'Miro el camino', f: 'Recoger el fruto de estos catorce días.', verse: 'El que comenzó en vosotros la buena obra, la perfeccionará', ref: 'Filipenses 1:6', q: 'Relee tus páginas: ¿cómo has cambiado? ¿Qué práctica seguirá contigo desde mañana?' }
+    ];
+    this.cover = { id: 'Iujaige0Ks0', by: 'Pascal Debrunner', at: 'https://unsplash.com/@debrupas' };
+    this.photos = [
+      { id: 'tV6GR2Eeqjk', by: 'iwin', at: 'https://unsplash.com/@mono_log' },
+      { id: '3CA_-xcpulY', by: 'Sixteen Miles Out', at: 'https://unsplash.com/@sixteenmilesout' },
+      { id: 'cpAxb1E57zE', by: 'Jonny Gios', at: 'https://unsplash.com/@supergios' },
+      { id: 'aZ6A0TRjpzc', by: 'Annie Spratt', at: 'https://unsplash.com/@anniespratt' },
+      { id: 'wwBlw-VIVjQ', by: 'Ciocan Ciprian', at: 'https://unsplash.com/@cipriann' },
+      { id: 'f-1griVYSg0', by: 'Gianluca Colicchia', at: 'https://unsplash.com/@hornetxx1' },
+      { id: 'J3H-rth8cck', by: 'Rob Wicks', at: 'https://unsplash.com/@robwicks' },
+      { id: 'kM6x7INfuyA', by: 'Anya Chernykh', at: 'https://unsplash.com/@meshushe' },
+      { id: 'VWOpU_yicJg', by: 'Wes Hicks', at: 'https://unsplash.com/photos/a-starry-night-sky-VWOpU_yicJg' },
+      { id: 'k-oS0iKn0Qg', by: 'Nathan Dumlao', at: 'https://unsplash.com/@nate_dumlao' },
+      { id: 'Nq1yYSYCKAQ', by: 'Vladislav Zakharevich', at: 'https://unsplash.com/@vladzh' },
+      { id: 'B5nCJC-KpvA', by: 'Slava Auchynnikau', at: 'https://unsplash.com/@auchynnikau' }
+    ];
+    this.chapters = [
+      { title: 'Bienvenida al descanso sagrado', sub: 'Por qué la noche también es un lugar de encuentro con Dios.', kicker: 'Fundamento', min: '10 min',
+        verse: 'En paz me acostaré, y asimismo dormiré; porque solo tú, Señor, me haces vivir confiado', ref: 'Salmo 4:8',
+        p1: 'Durante siglos, los creyentes han entendido que el sueño no es una interrupción de la vida espiritual, sino parte de ella. Al cerrar los ojos practicamos un acto de confianza: soltamos el control y nos entregamos al cuidado de Aquel que no duerme. Este eBook te acompañará durante treinta y cinco noches para convertir ese momento en un ritual sencillo y luminoso.',
+        p2: 'Cada capítulo sigue el mismo ritmo de diez minutos: cuatro de lectura, cuatro de práctica y dos de oración. No necesitas experiencia previa, solo un lugar tranquilo, una luz suave y el deseo de descansar en paz. Los ángeles, mensajeros de la luz de Dios, serán la imagen que guíe cada práctica.',
+        reflect: '¿Cómo suelen ser tus últimos diez minutos antes de dormir? ¿Qué te gustaría que fueran?',
+        p3: 'Antes de comenzar, haz un pequeño pacto contigo: durante treinta y cinco noches darás a Dios los últimos diez minutos del día. No importa si llegas agotado, distraído o escéptico; el ritual no exige perfección, solo presencia. Ten a mano este libro, una luz tenue y, si lo deseas, un cuaderno para anotar lo que Dios vaya susurrando a tu descanso.',
+        prayer: 'Señor, esta noche te entrego mi cansancio, mis prisas y todo lo que quedó sin terminar. Enséñame a descansar confiando en ti, como un niño en brazos de su padre. Envía a tus ángeles a velar junto a mi cama, y que su luz me recuerde que nunca duermo solo. Recibe estas treinta y cinco noches que hoy comienzo y conviértelas en un camino de paz. Amén.',
+        quiz: [
+          { q: '¿Cuál es el ritmo del ritual de cada noche?', opts: ['4 min de lectura, 4 de práctica y 2 de oración', '10 minutos de lectura continua', '5 minutos de música y 5 de silencio'], a: 0, ex: 'Cada capítulo sigue el mismo ritmo: lectura (4 min), práctica guiada (4 min) y oración de entrega (2 min).' },
+          { q: 'Según el Salmo 4:8, ¿quién nos hace vivir confiados?', opts: ['Nuestra propia fuerza', 'Solo el Señor', 'La rutina nocturna'], a: 1, ex: 'El salmista descansa en paz porque «solo tú, Señor, me haces vivir confiado».' }
+        ] },
+      { title: 'Prepara tu santuario nocturno', sub: 'Convierte tu habitación en un pequeño lugar sagrado.', kicker: 'Preparación', min: '10 min',
+        verse: 'Entra en tu aposento, y cerrada la puerta, ora a tu Padre que está en secreto', ref: 'Mateo 6:6',
+        p1: 'El espacio importa. Jesús invitaba a orar en el aposento, con la puerta cerrada: un lugar íntimo, sin ruido ni espectadores. Esta noche, antes de acostarte, dedica unos minutos a ordenar tu habitación, bajar las luces y apagar las pantallas. Cada gesto le dice a tu cuerpo: aquí comienza el descanso.',
+        p2: 'Puedes añadir una señal visible de lo sagrado: una vela segura, una Biblia en la mesilla, una imagen que te hable de paz. No se trata de decorar, sino de recordar. Cuando tu mirada encuentre esa señal, tu corazón recordará que la noche también pertenece a Dios.',
+        reflect: '¿Qué objeto o gesto podría recordarte cada noche que tu habitación es también un lugar de oración?',
+        p3: 'Un santuario también se prepara con el cuerpo: una ducha tibia, ropa cómoda, una infusión sin cafeína. Y se protege con límites amables: avisa a los tuyos de que esos diez minutos son tu cita con Dios. Verás que, con los días, el propio umbral de la habitación se convertirá en una puerta de entrada a la calma.',
+        prayer: 'Padre, consagro este espacio a tu presencia. Que estas paredes guarden mi sueño, que esta cama sea lugar de restauración y que tu paz habite en esta casa. Bendice a quienes duermen bajo este techo y a quienes esta noche no tienen dónde descansar. Que tu ángel esté de guardia en mi puerta, y tu nombre sea lo último que pronuncie. Amén.',
+        quiz: [
+          { q: '¿Qué recomienda el capítulo hacer antes de acostarse?', opts: ['Revisar el teléfono una última vez', 'Ordenar, bajar las luces y apagar pantallas', 'Cenar abundantemente'], a: 1, ex: 'Los gestos de preparación (orden, luz baja, sin pantallas) le indican al cuerpo que comienza el descanso.' },
+          { q: 'La señal visible de lo sagrado sirve para…', opts: ['Decorar la habitación', 'Impresionar a las visitas', 'Recordar que la noche también pertenece a Dios'], a: 2, ex: 'No se trata de decorar, sino de recordar: la mirada encuentra la señal y el corazón recuerda.' }
+        ] },
+      { title: 'La respiración de la calma', sub: 'Minutos 1 y 2: respira al ritmo de una palabra de paz.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Estad quietos, y conoced que yo soy Dios', ref: 'Salmo 46:10',
+        p1: 'La respiración es la puerta más corta hacia la calma. Acostado, coloca una mano sobre el pecho y otra sobre el vientre. Inhala contando hasta cuatro, retén dos, exhala contando hasta seis. Al exhalar, repite interiormente una palabra: «paz», «gracias» o simplemente «Jesús».',
+        p2: 'Imagina que con cada exhalación un ángel recoge tus tensiones como quien recoge hojas caídas. No luches contra los pensamientos: déjalos pasar como nubes. La quietud no se conquista, se recibe. Repite el ciclo entre ocho y diez veces, hasta notar que el cuerpo pesa un poco más sobre la cama.',
+        reflect: '¿Qué palabra de paz eligirás para acompañar tu respiración esta noche?',
+        p3: 'Si al principio contar te resulta difícil, no te preocupes: la medida exacta importa menos que la suavidad. Lo esencial es que la exhalación sea más larga que la inhalación, porque así el cuerpo entiende que el peligro pasó y puede descansar. Con la práctica, bastarán tres respiraciones para que tu interior reconozca el camino de vuelta a la calma.',
+        prayer: 'Espíritu de Dios, aliento de vida, aquieta mi mente como se aquieta el mar cuando tú lo mandas callar. Que cada inhalación me llene de tu vida y cada exhalación deposite en tus manos mis tensiones. Respira tú en mí cuando yo ya no sepa respirar, y llévame en tu suavidad hasta el silencio donde habitas. Amén.',
+        quiz: [
+          { q: '¿Cuál es el patrón de respiración propuesto?', opts: ['Inhala 4, retén 2, exhala 6', 'Inhala 10, exhala 10', 'Respirar rápido durante un minuto'], a: 0, ex: 'El patrón 4-2-6 alarga la exhalación, que es lo que activa la calma del cuerpo.' },
+          { q: '¿Qué se sugiere hacer con los pensamientos que llegan?', opts: ['Analizarlos uno a uno', 'Dejarlos pasar como nubes', 'Apuntarlos en el teléfono'], a: 1, ex: 'No se lucha contra los pensamientos: se dejan pasar, porque la quietud no se conquista, se recibe.' }
+        ] },
+      { title: 'Suelta el peso del día', sub: 'Minutos 3 y 4: entrega lo que cargas antes de dormir.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar', ref: 'Mateo 11:28',
+        p1: 'Muchas noches no dormimos porque seguimos cargando el día: la conversación pendiente, el error, la lista de mañana. Jesús no dice «resuélvelo todo y luego ven»; dice «venid… y yo os haré descansar». Esta práctica consiste en nombrar, una a una, las cargas del día y entregarlas.',
+        p2: 'Visualiza una mesa de luz delante de ti. Sobre ella deposita cada preocupación como si fuera un objeto: nómbrala en voz baja y suéltala. Imagina que un ángel la recibe y la lleva a la presencia de Dios. Lo que entregas no desaparece, pero deja de dormir contigo.',
+        reflect: '¿Qué carga concreta de hoy necesitas dejar sobre la mesa de luz esta noche?',
+        p3: 'Hay cargas que vuelven noche tras noche; no te desanimes. Entregarlas de nuevo no es fracasar, es perseverar. Algunos encuentran ayuda escribiendo la preocupación en un papel y dejándolo fuera de la habitación: un gesto físico que le dice a la mente que ese asunto ya tiene guardián, y no eres tú.',
+        prayer: 'Jesús, tú conoces lo que pesa en mí mejor que yo mismo. Recibe mis cargas esta noche: las que puedo nombrar y las que no tienen nombre todavía. Guárdalas tú mientras duermo, y si mañana debo retomarlas, dame fuerzas nuevas para llevarlas contigo. Haz ligero mi corazón, como prometiste, para que yo pueda descansar. Amén.',
+        quiz: [
+          { q: 'Según Mateo 11:28, ¿qué condición pide Jesús para darnos descanso?', opts: ['Resolver primero todos los problemas', 'Solo venir a él', 'No equivocarse durante el día'], a: 1, ex: 'Jesús no pide resolverlo todo antes: la única invitación es «venid a mí».' },
+          { q: '¿Qué se hace con cada preocupación en la práctica?', opts: ['Se nombra y se deposita en la mesa de luz', 'Se escribe una solución', 'Se ignora por completo'], a: 0, ex: 'Nombrar y soltar: lo que entregas deja de dormir contigo.' }
+        ] },
+      { title: 'La luz sanadora', sub: 'Los ángeles como mensajeros del cuidado de Dios.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Pues a sus ángeles mandará acerca de ti, que te guarden en todos tus caminos', ref: 'Salmo 91:11',
+        p1: 'En la Escritura, los ángeles nunca actúan por cuenta propia: son mensajeros y servidores del amor de Dios. Hablar de sanación angelical no es buscar poderes ocultos, sino contemplar cómo Dios envía su cuidado hasta el detalle de nuestras noches. El Salmo 91 lo promete: sus ángeles te guardan en todos tus caminos, también en el camino hacia el sueño.',
+        p2: 'Esta noche, al apagar la luz, imagina la habitación llena de una claridad suave, como el amanecer. Esa luz es imagen de la presencia de Dios que no se ausenta cuando tú te duermes. Los ángeles velan; tú puedes soltar la vigilancia.',
+        reflect: '¿Qué cambiaría en tu forma de dormir si creyeras de verdad que alguien vela por ti toda la noche?',
+        p3: 'La tradición ha llamado Rafael —«Dios sana»— al ángel de la sanación, Miguel al protector y Gabriel al mensajero. Más allá de los nombres, lo que importa es lo que revelan: un Dios que cuida, protege y habla. Al contemplar la luz angelical no adoramos a los ángeles; agradecemos al Dios que los envía.',
+        prayer: 'Dios de los ángeles, gracias porque tu cuidado no duerme ni se toma descanso. Envía tu luz sanadora a esta habitación y a cada rincón de mi vida donde haya heridas abiertas. Que tus mensajeros de paz velen mi sueño, y que al despertar recuerde que fui guardado toda la noche. Guárdame en todos tus caminos, también en este que lleva al descanso. Amén.',
+        quiz: [
+          { q: 'En la Biblia, los ángeles son…', opts: ['Fuerzas independientes con poder propio', 'Mensajeros y servidores del amor de Dios', 'Símbolos sin ningún significado'], a: 1, ex: 'Los ángeles nunca actúan por cuenta propia: sirven y comunican el cuidado de Dios.' },
+          { q: '¿Qué promete el Salmo 91:11?', opts: ['Que no habrá más problemas', 'Que los ángeles te guardan en todos tus caminos', 'Que el sueño llegará en cinco minutos'], a: 1, ex: '«A sus ángeles mandará acerca de ti, que te guarden en todos tus caminos».' }
+        ] },
+      { title: 'Recorrido de luz por el cuerpo', sub: 'Minutos 5 y 6: bendice tu cuerpo de la cabeza a los pies.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Y el mismo Dios de paz os santifique por completo; espíritu, alma y cuerpo', ref: '1 Tesalonicenses 5:23',
+        p1: 'El cuerpo también necesita ser despedido del día. Acostado, lleva tu atención a la frente e imagina que una luz cálida la toca y la relaja. Desciende lentamente: ojos, mandíbula, cuello, hombros… En cada zona, di interiormente: «que la paz de Dios te sane y te descanse».',
+        p2: 'No tengas prisa; el recorrido completo hasta los pies puede tomar dos minutos o toda la noche, y ambas cosas están bien. Si te duermes a mitad del camino, la práctica habrá cumplido su propósito. Dios santifica por completo: espíritu, alma y también este cuerpo cansado.',
+        reflect: '¿Qué parte de tu cuerpo acumula más tensión al final del día? Comienza por ella esta noche.',
+        p3: 'Este recorrido es también un acto de gratitud. Estos hombros cargaron el día; estas manos trabajaron; estos pies te sostuvieron. Bendecirlos antes de dormir es tratar el cuerpo como lo que la fe dice que es: templo del Espíritu, criatura amada, compañero fiel del alma en su camino hacia Dios.',
+        prayer: 'Dios de paz, bendice este cuerpo que me sostiene cada día: la frente que piensa, los ojos que miran, las manos que trabajan y los pies que caminan. Sana sus tensiones con tu luz, repara en el sueño lo que el día ha desgastado, y concédele un descanso profundo y reparador. Santifícame por completo: espíritu, alma y cuerpo. Amén.',
+        quiz: [
+          { q: '¿Cómo se recorre el cuerpo en esta práctica?', opts: ['De los pies a la cabeza, rápidamente', 'De la cabeza a los pies, sin prisa', 'Solo se atiende la espalda'], a: 1, ex: 'La luz desciende desde la frente hasta los pies, lentamente, bendiciendo cada zona.' },
+          { q: 'Si te duermes a mitad de la práctica…', opts: ['Debes empezar de nuevo', 'La práctica ha fallado', 'La práctica ha cumplido su propósito'], a: 2, ex: 'El objetivo es descansar en paz: dormirse durante el recorrido es un buen final.' }
+        ] },
+      { title: 'Perdón y gratitud nocturna', sub: 'Minutos 7 y 8: cierra el día sin deudas en el corazón.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Airaos, pero no pequéis; no se ponga el sol sobre vuestro enojo', ref: 'Efesios 4:26',
+        p1: 'Hay un consejo antiguo y sabio: que el sol no se ponga sobre tu enojo. El rencor que se acuesta contigo amanece más pesado. Antes de dormir, repasa el día con dos preguntas: ¿a quién necesito perdonar, aunque sea comenzando a quererlo? ¿y qué tres cosas puedo agradecer, por pequeñas que sean?',
+        p2: 'El perdón nocturno no siempre resuelve la relación, pero libera tu lado de la cuerda. Y la gratitud reorienta la mirada: quien se duerme contando dones descansa distinto de quien se duerme contando ofensas. Un ángel, dice la imagen de este ritual, anota cada gracias y lo convierte en canción.',
+        reflect: '¿Hay alguien —quizá tú mismo— a quien necesites perdonar antes de dormir esta noche?',
+        p3: 'Sé paciente con el perdón: hay heridas que necesitan más de una noche, y algunas necesitan también ayuda y tiempo. El ritual no te pide sentir algo que no sientes, sino abrir una rendija: «Señor, quiero querer perdonar». Esa pequeña oración honesta es suficiente para esta noche; los ángeles llevan también las oraciones incompletas.',
+        prayer: 'Padre bueno, al terminar este día te pido: perdona mis deudas como yo perdono a mis deudores. Donde no llegue mi perdón, pon tú tu misericordia; donde no llegue mi memoria agradecida, pon tú tu bondad. Gracias por los dones de hoy, los que vi y los que no supe ver. Que me duerma en paz con Dios, con los demás y conmigo mismo. Amén.',
+        quiz: [
+          { q: '¿Qué aconseja Efesios 4:26?', opts: ['Que el sol no se ponga sobre nuestro enojo', 'Evitar toda emoción', 'Resolver los conflictos por mensaje'], a: 0, ex: 'El enojo que se acuesta con nosotros amanece más pesado; por eso se entrega antes de dormir.' },
+          { q: '¿Cuántas gratitudes propone la práctica cada noche?', opts: ['Una', 'Tres', 'Diez'], a: 1, ex: 'Tres cosas que agradecer, por pequeñas que sean, reorientan la mirada antes del sueño.' }
+        ] },
+      { title: 'El manto de protección', sub: 'Descansar cubierto, como bajo las alas de Dios.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Con sus plumas te cubrirá, y debajo de sus alas estarás seguro', ref: 'Salmo 91:4',
+        p1: 'El Salmo 91 usa una imagen tierna y poderosa: Dios cubre como un ave cubre a sus polluelos. Para quien sufre noches de ansiedad, esta imagen es medicina. No estás expuesto a la oscuridad: estás cubierto. La tradición cristiana ha visto en los ángeles a los guardianes que Dios asigna a cada persona.',
+        p2: 'Al taparte con la manta esta noche, conviértela en gesto de oración: «así como esta manta me cubre, cúbreme tú, Señor». Un gesto físico repetido cada noche se vuelve ancla: al cabo de unos días, el simple acto de taparte comenzará a traer calma por sí mismo.',
+        reflect: '¿Qué miedo nocturno quisieras poner esta noche debajo de las alas de Dios?',
+        p3: 'Enseña este gesto a los tuyos: los niños, sobre todo, entienden de mantas y de alas. Arropar a alguien diciendo una bendición es una de las formas más antiguas de transmitir la fe. La misma manta que abriga el cuerpo puede, cada noche, recordarle al alma bajo qué alas duerme.',
+        prayer: 'Altísimo, cúbreme esta noche con tus plumas; que debajo de tus alas encuentre seguridad mi corazón. Pon tu manto sobre mis miedos, sobre mi casa y sobre los que amo, estén donde estén. Que ningún temor tenga la última palabra en mi noche, porque tú eres mi refugio y mi fortaleza. Duerma yo seguro, porque tú velas. Amén.',
+        quiz: [
+          { q: '¿Qué imagen usa el Salmo 91:4?', opts: ['Una fortaleza de piedra', 'Un ave que cubre con sus alas', 'Una lámpara encendida'], a: 1, ex: '«Con sus plumas te cubrirá, y debajo de sus alas estarás seguro».' },
+          { q: '¿Qué gesto físico propone el capítulo como oración?', opts: ['Encender todas las luces', 'Taparse con la manta diciendo «cúbreme tú, Señor»', 'Dormir sin manta'], a: 1, ex: 'Un gesto repetido cada noche se vuelve ancla de calma y de confianza.' }
+        ] },
+      { title: 'Palabras de paz para la noche', sub: 'Versículos breves para memorizar y repetir al acostarte.', kicker: 'Recursos', min: '10 min',
+        verse: 'Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones', ref: 'Filipenses 4:7',
+        p1: 'La mente nocturna necesita algo que sostener; si no le das una palabra, ella buscará una preocupación. Por eso este capítulo te propone memorizar versículos cortos, uno por semana: «La paz de Dios guardará vuestros corazones» (Fil 4:7), «En paz me acostaré» (Sal 4:8), «Estad quietos» (Sal 46:10).',
+        p2: 'La repetición serena no es magia: es rumiar la Palabra, como han hecho los orantes de todos los siglos. Repite el versículo al ritmo de tu respiración, y cuando la mente se escape —lo hará— vuelve sin regañarte. Cada regreso es, en sí mismo, un acto de oración.',
+        reflect: '¿Cuál de los versículos propuestos quieres hacer tuyo esta semana?',
+        p3: 'Con el tiempo puedes crear tu propio tesoro nocturno: tres o cuatro versículos aprendidos de memoria que te acompañen siempre, incluso en un hospital, un viaje o una noche de tormenta. La Palabra memorizada es lámpara que nadie puede apagar: brilla exactamente cuando todo lo demás está oscuro.',
+        prayer: 'Señor, que tu Palabra sea la última voz que escuche cada noche y la primera que recuerde al despertar. Siembra tus versículos en lo profundo de mi memoria, para que broten justo cuando los necesite. Y que tu paz, que sobrepasa todo entendimiento, monte guardia esta noche sobre mi corazón y mis pensamientos en Cristo Jesús. Amén.',
+        quiz: [
+          { q: 'Si no le damos una palabra a la mente nocturna…', opts: ['Se queda en silencio', 'Buscará una preocupación', 'Se duerme al instante'], a: 1, ex: 'Por eso el ritual propone versículos breves para sostener la atención.' },
+          { q: '¿Qué hacer cuando la mente se distrae repitiendo el versículo?', opts: ['Regañarse por distraerse', 'Abandonar la práctica', 'Volver sin regañarse: cada regreso es oración'], a: 2, ex: 'El regreso amable a la Palabra es, en sí mismo, un acto de oración.' }
+        ] },
+      { title: 'La oración de entrega', sub: 'Minutos 9 y 10: las últimas palabras antes de dormir.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'En tu mano encomiendo mi espíritu; tú me has redimido, oh Señor, Dios de verdad', ref: 'Salmo 31:5',
+        p1: 'Las últimas palabras del día son un timón: orientan el sueño. Jesús mismo se durmió en la cruz con las palabras del Salmo 31: «en tu mano encomiendo mi espíritu». Esa es la oración de entrega: breve, confiada, definitiva. No pide nada; simplemente se deja caer en las manos de Dios.',
+        p2: 'Dila lentamente tres veces, con las manos abiertas sobre la cama. Si quieres, añade los nombres de las personas que amas: «en tu mano los encomiendo». Después, silencio. No hay técnica más antigua ni más segura para cruzar la frontera del sueño acompañado.',
+        reflect: '¿A quién quieres encomendar esta noche, junto contigo, en las manos de Dios?',
+        p3: 'La entrega también es la gran escuela de la confianza: quien aprende cada noche a soltar en las manos de Dios, va aprendiendo a no temer. Por eso los antiguos hablaban del sueño como un maestro del alma: cada noche practicamos la confianza, y cada mañana ensayamos el comienzo nuevo.',
+        prayer: 'En tu mano encomiendo mi espíritu, mi noche, mi familia y mi mañana. Encomiendo a los que amo y a los que me cuesta amar, mis proyectos y mis límites, lo vivido hoy y lo que vendrá. Tú me has redimido, Señor, Dios de verdad: en ti me dejo caer como en un lecho seguro. Recíbeme, guárdame y despiértame en tu luz. Amén.',
+        quiz: [
+          { q: '¿De qué salmo proviene la oración de entrega?', opts: ['Salmo 23', 'Salmo 31', 'Salmo 100'], a: 1, ex: '«En tu mano encomiendo mi espíritu» es del Salmo 31:5, orado por Jesús en la cruz.' },
+          { q: '¿Cómo se practica la oración de entrega?', opts: ['Tres veces, lentamente, con las manos abiertas', 'Una vez, en voz muy alta', 'Escribiéndola diez veces'], a: 0, ex: 'Lentitud, repetición y manos abiertas: un cuerpo que expresa confianza.' }
+        ] },
+      { title: 'Cuando el sueño no llega', sub: 'Qué hacer en las noches difíciles, sin ansiedad ni culpa.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'Me acuerdo de ti en mi lecho, cuando medito en ti en las vigilias de la noche', ref: 'Salmo 63:6',
+        p1: 'Habrá noches en que, aun con el ritual, el sueño no llegue. El salmista también las conoció, y las convirtió en vigilia: «medito en ti en las vigilias de la noche». La primera regla es no pelear contra el insomnio; la lucha despierta más. Si pasan veinte minutos sin dormir, no te culpes: cambia de postura interior.',
+        p2: 'Convierte la vigilia en compañía: repite tu versículo, reza por las personas que estarán despiertas a esta hora —enfermos, cuidadores, quienes trabajan de noche—, y deja que el cuerpo repose aunque la mente vele. Descansar también es quedarse quieto en presencia de Dios, con o sin sueño.',
+        reflect: '¿Puedes recordar una noche difícil? ¿Cómo la vivirías distinto con esta mirada?',
+        p3: 'Si el insomnio se vuelve frecuente, cuida también el cuerpo: consulta a tu médico, revisa horarios y pantallas, camina de día. La fe no sustituye ese cuidado, lo abraza. Dios sana también a través de médicos y buenos hábitos; el ritual acompaña ese camino, no lo reemplaza.',
+        prayer: 'Dios de las vigilias, si el sueño tarda esta noche, quédate conmigo y hazme compañía en la espera. Te presento a los que ahora mismo están despiertos: los enfermos y quienes los cuidan, los que trabajan de noche, los que lloran y no pueden dormir. Que aun despierto pueda descansar en tu presencia, porque estar contigo ya es reposo. Amén.',
+        quiz: [
+          { q: '¿Cuál es la primera regla en una noche de insomnio?', opts: ['Levantarse y trabajar', 'No pelear contra el insomnio', 'Contar el tiempo que llevas despierto'], a: 1, ex: 'La lucha despierta más; la vigilia se acoge y se convierte en compañía.' },
+          { q: '¿Qué propone el capítulo hacer durante la vigilia?', opts: ['Revisar redes sociales', 'Orar por quienes están despiertos a esa hora', 'Planificar el día siguiente'], a: 1, ex: 'La vigilia se vuelve intercesión: enfermos, cuidadores, trabajadores nocturnos.' }
+        ] },
+      { title: 'Un ritual para toda la vida', sub: 'Cómo sostener el hábito y hacerlo crecer.', kicker: 'Cierre', min: '10 min',
+        verse: 'Por la misericordia del Señor no hemos sido consumidos; nuevas son cada mañana', ref: 'Lamentaciones 3:22-23',
+        p1: 'Treinta y cinco noches no forman un hábito, pero sí abren un camino. A partir de aquí, el ritual es tuyo: puedes acortarlo en noches cansadas —solo la respiración y la entrega— o extenderlo los fines de semana con una lectura más larga. Lo importante no es la perfección, sino el regreso: cada noche es nueva, como las misericordias de Dios.',
+        p2: 'Considera compartir el camino: un ritual orado en pareja, con hijos o en comunidad multiplica su fruto. Y cuando falles una semana entera —sucederá—, recuerda la promesa de Lamentaciones: nuevas son cada mañana. La paz no se conquista de una vez; se recibe cada noche, de nuevo.',
+        reflect: 'De todo el ritual, ¿qué práctica se quedará contigo? ¿Con quién podrías compartirla?',
+        p3: 'Guarda este libro cerca de la cama y vuelve a él cuando lo necesites: repite el ciclo de treinta y cinco noches en tiempos difíciles, o abre al azar un capítulo como quien busca una palabra amiga. El ritual ya no está en estas páginas: está en ti, y cada noche te espera como una puerta abierta hacia la paz.',
+        prayer: 'Gracias, Señor, por estas treinta y cinco noches y por cada pequeña paz recibida. Que este ritual me acompañe toda la vida: en las noches fáciles y en las difíciles, en casa o lejos de ella. Bendice a todos los que buscan descanso esta noche, y haz de mi sueño una alabanza silenciosa. Que tu paz sea mi casa, y tus ángeles, mi compañía. Amén.',
+        quiz: [
+          { q: '¿Qué es lo importante para sostener el hábito?', opts: ['La perfección diaria', 'El regreso: volver cada noche de nuevo', 'Hacerlo siempre completo'], a: 1, ex: 'Cada noche es nueva, como las misericordias de Dios: lo esencial es regresar.' },
+          { q: '¿Qué sugiere el capítulo para multiplicar el fruto del ritual?', opts: ['Practicarlo en secreto siempre', 'Compartirlo en pareja, familia o comunidad', 'Hacerlo solo en vacaciones'], a: 1, ex: 'Un ritual compartido se sostiene mejor y multiplica su fruto.' }
+        ] }
+    ];
+    this.buildBook();
+  }
+
+  buildBook() {
+    const B = this.chapters;
+    const E = [...this.newChaptersA(), ...this.newChaptersB()];
+    this.chapters = [
+      B[0], B[1], E[0], E[1], E[2], E[3], E[4],
+      B[2], B[3], B[5], B[6], B[8], B[9], E[5],
+      B[4], B[7], E[6], E[7], E[8], E[9], E[10],
+      B[10], E[11], E[12], E[13], E[14], E[15], E[16],
+      E[17], E[18], E[19], E[20], E[21], B[11], E[22]
+    ];
+    const partNames = [
+      'Parte I · Fundamentos del descanso sagrado',
+      'Parte II · El ritual, paso a paso',
+      'Parte III · La compañía de los ángeles',
+      'Parte IV · Para las noches difíciles',
+      'Parte V · Una vida en paz'
+    ];
+    this.chapters.forEach((c, i) => { c.part = partNames[Math.floor(i / 7)]; });
+    this.emergency = [
+      { tag: 'Cuando no puedo dormir', ref: 'Salmo 4:8', text: 'Señor, el sueño no llega y la noche se hace larga. He contado las horas y he peleado contra la almohada, y ya no quiero pelear más: me quedo contigo. Tú no me pides dormirme, solo descansar en ti. Vela tú por mí mientras aprendo a esperar; hazte cargo de los relojes, del cansancio de mañana y de esta impaciencia. Que tu presencia sea mi descanso aunque mis ojos sigan abiertos, y si el sueño llega, recíbeme en él como en tus brazos. Amén.' },
+      { tag: 'Cuando siento ansiedad', ref: 'Filipenses 4:6-7', text: 'Dios de paz, mi pecho está apretado y mis pensamientos corren en círculos que no puedo detener. Pongo mi mano sobre el corazón y te lo entrego tal como late: acelerado, asustado, tuyo. Respira tú conmigo, despacio. Tu Palabra promete que si te presento mis peticiones, tu paz —esa que sobrepasa todo entendimiento— guardará mi corazón y mis pensamientos. La reclamo esta noche. Nada de lo que temo es más grande que tú. Amén.' },
+      { tag: 'Después de una pesadilla', ref: 'Salmo 91:5', text: 'Padre, desperté con miedo y la oscuridad todavía me pesa encima. Tu Palabra dice que no temeré el terror nocturno, así que vengo a refugiarme en ella. Llena esta habitación de tu luz; que tus ángeles guarden mi cama, mi mente y mis recuerdos. Lo que soñé no es profecía ni verdad: es solo niebla, y la niebla se disuelve ante ti. El mal no tiene poder sobre mí, porque tú me cubres. Devuélveme un sueño limpio y tranquilo, y que despierte mañana en paz. Amén.' },
+      { tag: 'En noches de duelo', ref: 'Salmo 34:18', text: 'Señor, esta noche pesa la ausencia. La cama, la casa, el silencio: todo recuerda a quien ya no está. Tú estás cerca de los quebrantados de corazón, y mi corazón lo está. Recibe mis lágrimas como oración, porque hay dolores que no encuentran palabras. Abraza a quien ya descansa contigo y dile lo que no alcancé a decirle. Y abrázame a mí, que sigo aprendiendo a vivir con este vacío. No te pido que quites el dolor esta noche: te pido que lo acompañes. Consuélame hasta el amanecer. Amén.' },
+      { tag: 'Cuando me preocupa el dinero o el trabajo', ref: 'Mateo 6:26', text: 'Padre providente, las cuentas no me dejan dormir. Hago números en la oscuridad y los números no cambian, pero mi angustia crece. Tú dijiste que mirara las aves del cielo: no siembran ni siegan, y tú las alimentas. No soy menos que ellas. Te entrego esta noche lo que no puedo resolver a oscuras: el trabajo, las deudas, el futuro de los míos. Dame mañana claridad para hacer mi parte, puertas abiertas donde yo no las veo y honestidad para vivir con lo suficiente. Esta noche, solo dame sueño y confianza. Amén.' },
+      { tag: 'Cuando un ser querido sufre', ref: 'Isaías 41:10', text: 'Dios de consuelo, no soy yo quien sufre esta noche: es alguien que amo, y eso duele a veces más. Quisiera cargar su dolor y no puedo; quisiera estar despierto por si me necesita, pero el cuerpo se me acaba. Te lo encomiendo por su nombre. Tú le dices: «no temas, porque yo estoy contigo». Está contigo también cuando yo duermo. Envía tus ángeles a su cabecera, sostén su ánimo, guía a quienes lo cuidan. Y enséñame a confiar en que tu amor por él es todavía más grande que el mío. Amén.' },
+      { tag: 'En noches de enfermedad o dolor', ref: 'Salmo 41:3', text: 'Señor, mi cuerpo duele y la noche lo hace más largo. Tu Palabra dice que tú sostienes al enfermo sobre su lecho: sostenme ahora. Toca con tu luz sanadora cada zona que sufre; donde no llegue el alivio, llega tú con tu compañía. Bendice las medicinas, los médicos y las manos que me cuidan. Dame el sueño a pesar del dolor, y si no llega el sueño, dame paciencia y tu paz. Recuérdame que este cuerpo cansado es templo tuyo, y que tú no abandonas tu casa. Amén.' },
+      { tag: 'Antes de una noche importante', ref: 'Josué 1:9', text: 'Señor, mañana me espera algo grande y esta noche los nervios quieren robarme el descanso. Tú le dijiste a Josué: «esfuérzate y sé valiente; no temas ni desmayes, porque yo estaré contigo dondequiera que vayas». Tomo esa palabra para mí. Mañana estarás en esa sala, en ese examen, en ese viaje, en esa conversación: no entro solo. Ya hice lo que estaba en mi mano; lo que falta te pertenece. Dame esta noche un sueño profundo y mañana un corazón sereno. En tus manos queda mi mañana. Amén.' }
+    ];
+  }
+
+  save(completed) {
+    try { localStorage.setItem('ritual-angelical-v1', JSON.stringify({ completed })); } catch (e) {}
+  }
+
+  go(screen) { this.setState({ screen }); window.scrollTo(0, 0); }
+
+  jUpdate(i, patch) {
+    const cur = this.state.jEntries[i] || { m: [], t: '' };
+    const jEntries = { ...this.state.jEntries, [i]: { ...cur, ...patch } };
+    try { localStorage.setItem('ritual-diario-v1', JSON.stringify(jEntries)); } catch (e) {}
+    this.setState({ jEntries });
+  }
+
+  newChaptersA() {
+    return [
+      { title: 'El descanso es un regalo, no un premio', sub: 'No tienes que merecer el sueño: solo aprender a recibirlo.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Por demás es que os levantéis de madrugada y vayáis tarde a reposar… pues que a su amado dará Dios el sueño', ref: 'Salmo 127:2',
+        p1: 'Vivimos en una cultura que trata el descanso como un premio: primero produce, luego —si sobra tiempo— duerme. El Salmo 127 desmonta esa lógica con una frase asombrosa: Dios da el sueño a su amado. No dice que lo venda, ni que lo pague al final de la jornada; dice que lo regala.',
+        p2: 'Esto cambia la postura interior con la que te acuestas. No llegas a la cama a rendir cuentas de lo hecho y lo pendiente: llegas a recibir un don. El insomne suele pelear por dormirse como quien intenta ganarse algo; el creyente aprende a abrir las manos como quien recibe.',
+        p3: 'Esta noche, antes de cerrar los ojos, di despacio: «el sueño es un regalo y yo soy amado». Repítelo hasta que deje de sonar extraño. Porque esa es exactamente la verdad que este libro quiere grabar en ti.',
+        reflect: '¿Tratas tu descanso como un premio que debes ganarte o como un regalo que puedes recibir?',
+        prayer: 'Padre generoso, esta noche no vengo a rendir cuentas sino a recibir. Dame el sueño que regalas a tus amados, y enséñame a abrir las manos. Amén.',
+        quiz: [
+          { q: 'Según el Salmo 127:2, el sueño es…', opts: ['Un premio por el trabajo', 'Un regalo de Dios a su amado', 'Una pérdida de tiempo'], a: 1, ex: 'Dios no vende el sueño ni lo cobra: lo da a su amado.' },
+          { q: '¿Qué postura interior propone el capítulo al acostarse?', opts: ['Rendir cuentas del día', 'Pelear hasta dormirse', 'Abrir las manos para recibir'], a: 2, ex: 'El creyente no lucha por ganarse el descanso: lo recibe como un don.' }
+        ] },
+      { title: 'El sueño en la Biblia', sub: 'De la escalera de Jacob a la barca de Jesús: Dios actúa mientras dormimos.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Y soñó: una escalera estaba apoyada en tierra, y su extremo tocaba en el cielo; y ángeles de Dios subían y descendían por ella', ref: 'Génesis 28:12',
+        p1: 'La Biblia está llena de noches. Jacob huye, se acuesta sobre una piedra y ve en sueños una escalera llena de ángeles: descubre que ese lugar áspero era «casa de Dios y puerta del cielo». José recibe dormido las indicaciones que salvan a su familia. Samuel escucha su nombre en plena noche.',
+        p2: 'Y está la escena de la barca: la tormenta arrecia, los discípulos gritan, y Jesús duerme sobre un cabezal. Su sueño no es indiferencia; es la confianza absoluta de quien se sabe en las manos del Padre incluso en medio de la tempestad. Ese sueño es el que este ritual quiere enseñarte.',
+        p3: 'Dormir, en la Escritura, no es ausentarse de Dios: a menudo es el momento en que Él más obra. Esta noche acuéstate como Jacob, sin saber que tu cama puede ser puerta del cielo.',
+        reflect: '¿Qué te dice la imagen de Jesús dormido en plena tormenta sobre tus propias tormentas?',
+        prayer: 'Dios de Jacob, abre el cielo sobre mi cama esta noche. Y dame, Jesús, tu sueño de la barca: esa confianza que duerme en medio de la tormenta. Amén.',
+        quiz: [
+          { q: '¿Qué vio Jacob en su sueño en Betel?', opts: ['Una escalera con ángeles que subían y bajaban', 'Una zarza ardiente', 'Un arcoíris'], a: 0, ex: 'Génesis 28:12: una escalera de la tierra al cielo, llena de ángeles de Dios.' },
+          { q: 'El sueño de Jesús en la barca expresa…', opts: ['Indiferencia ante los demás', 'Confianza absoluta en el Padre', 'Cansancio sin significado'], a: 1, ex: 'Jesús duerme en la tormenta porque se sabe en las manos del Padre.' }
+        ] },
+      { title: '¿Qué es la sanación angelical?', sub: 'Aclarar la fuente: Dios sana; los ángeles sirven y acompañan.', kicker: 'Fundamento', min: '10 min',
+        verse: '¿No son todos espíritus ministradores, enviados para servicio a favor de los que serán herederos de la salvación?', ref: 'Hebreos 1:14',
+        p1: 'Conviene decirlo con claridad desde el principio: en este libro, la sanación angelical no es magia, ni energía impersonal, ni un poder que se invoca con fórmulas. La fuente de toda sanación es Dios. Los ángeles son, como dice Hebreos, espíritus ministradores: servidores enviados a favor nuestro.',
+        p2: 'Por eso nunca oramos a los ángeles como si fueran la fuente; oramos a Dios, y agradecemos que su cuidado nos llegue también a través de sus mensajeros. La diferencia parece sutil, pero es la que separa la fe confiada de la superstición ansiosa.',
+        p3: 'Cuando en las prácticas de este libro imagines luz, ángeles o alas, recuerda: son imágenes que la Escritura misma usa para hablarnos del cuidado concreto de Dios. La imaginación es la ventana; la gracia es el sol que entra por ella.',
+        reflect: '¿Qué diferencia hay entre confiar en el Dios que envía ángeles y buscar poderes en los ángeles mismos?',
+        prayer: 'Dios, único sanador, gracias por los servidores que envías a mi favor. Que nunca confunda al mensajero con el Autor del regalo. Amén.',
+        quiz: [
+          { q: 'En este libro, ¿cuál es la fuente de toda sanación?', opts: ['La energía de los ángeles', 'Dios', 'Las fórmulas correctas'], a: 1, ex: 'Los ángeles sirven y acompañan; la fuente de la sanación es siempre Dios.' },
+          { q: 'Según Hebreos 1:14, los ángeles son…', opts: ['Espíritus ministradores enviados para servicio', 'Dioses menores', 'Símbolos culturales'], a: 0, ex: 'Servidores enviados a favor de los herederos de la salvación.' }
+        ] },
+      { title: 'Los ladrones del descanso', sub: 'Pantallas, prisa y rumiación: conocer al enemigo para cerrarle la puerta.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Así que, no os afanéis por el día de mañana… Basta a cada día su propio mal', ref: 'Mateo 6:34',
+        p1: 'Tres ladrones entran cada noche en millones de dormitorios. El primero es la pantalla: su luz le dice al cerebro que aún es de día, y su contenido le da cuerda a la mente justo cuando debía soltarla. El segundo es la prisa: llegar a la cama corriendo y pretender frenar en seco.',
+        p2: 'El tercero es el más sutil: la rumiación, esa repetición circular de lo que salió mal hoy y lo que podría salir mal mañana. Jesús le puso nombre y remedio: no os afanéis por el mañana; basta a cada día su propio mal. El mañana tiene dueño, y no eres tú.',
+        p3: 'Este ritual es, en el fondo, un plan contra los tres: sustituye la pantalla por la Palabra, la prisa por diez minutos sin reloj, y la rumiación por la entrega. No luchas contra la oscuridad: enciendes una luz.',
+        reflect: '¿Cuál de los tres ladrones —pantalla, prisa, rumiación— te roba más noches? ¿Qué le pondrás en su lugar?',
+        prayer: 'Señor, guarda mi puerta esta noche. Quita de mis manos la pantalla, de mi cuerpo la prisa y de mi mente la rueda de las preocupaciones. Tuyo es el mañana. Amén.',
+        quiz: [
+          { q: '¿Cuáles son los tres ladrones del descanso?', opts: ['Café, ruido y frío', 'Pantalla, prisa y rumiación', 'Cena, luz y mascotas'], a: 1, ex: 'El capítulo nombra pantalla, prisa y rumiación, y propone un sustituto para cada uno.' },
+          { q: '¿Qué dice Jesús sobre el mañana en Mateo 6:34?', opts: ['Hay que planificarlo de noche', 'No os afanéis: basta a cada día su propio mal', 'Es mejor no pensar nunca en él'], a: 1, ex: 'El mañana tiene dueño; la noche no es el lugar para cargarlo.' }
+        ] },
+      { title: 'Espíritu, alma y cuerpo', sub: 'El descanso integral: Dios cuida a la persona completa.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Amado, yo deseo que tú seas prosperado en todas las cosas, y que tengas salud, así como prospera tu alma', ref: '3 Juan 1:2',
+        p1: 'La fe no compite con el cuidado del cuerpo: lo abraza. Dormir bien depende también de cosas muy terrenas —horarios regulares, cena ligera, menos cafeína, algo de sol y de movimiento durante el día— y honrarlas es parte de la espiritualidad, no una distracción de ella.',
+        p2: 'Juan desea a su amigo salud del cuerpo «así como prospera su alma»: las dos prosperidades van juntas. Un alma en paz ayuda al cuerpo a dormir; un cuerpo cuidado le da al alma un templo tranquilo donde orar.',
+        p3: 'Haz esta noche un pequeño inventario amable: ¿qué hábito de mi día está saboteando mi noche? Elige uno solo para mejorar esta semana. Dios bendice los pasos pequeños.',
+        reflect: '¿Qué hábito diurno concreto podrías cambiar esta semana para regalarle a tu cuerpo mejores noches?',
+        prayer: 'Creador mío, tú me hiciste espíritu, alma y cuerpo. Enséñame a cuidar el templo completo, y bendice los pequeños cambios que hoy comienzo. Amén.',
+        quiz: [
+          { q: '¿Qué relación propone el capítulo entre fe y cuidado del cuerpo?', opts: ['Compiten entre sí', 'La fe abraza el cuidado del cuerpo', 'El cuerpo no importa'], a: 1, ex: 'Honrar horarios, comida y movimiento es parte de la espiritualidad del descanso.' },
+          { q: '¿Qué propone el inventario nocturno?', opts: ['Cambiar todos los hábitos a la vez', 'Elegir un solo hábito para mejorar esta semana', 'Anotar todos los errores del día'], a: 1, ex: 'Un solo paso pequeño: Dios bendice los comienzos humildes.' }
+        ] },
+      { title: 'Tu ritual completo, noche a noche', sub: 'Los diez minutos, paso a paso: la secuencia que ya puedes practicar entera.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Todo tiene su tiempo, y todo lo que se quiere debajo del cielo tiene su hora', ref: 'Eclesiastés 3:1',
+        p1: 'Ya conoces las piezas; esta noche las unimos. Minuto 0: santuario listo — luz baja, pantalla lejos, la señal sagrada a la vista. Minutos 1-2: respiración de la calma, con tu palabra de paz. Minutos 3-4: suelta el peso del día sobre la mesa de luz.',
+        p2: 'Minutos 5-6: recorrido de luz por el cuerpo, de la frente a los pies. Minutos 7-8: perdón y tres gratitudes. Minutos 9-10: la oración de entrega, tres veces, con las manos abiertas. Y después, silencio: el resto lo hace Dios.',
+        p3: 'No te esclavices al reloj: la secuencia es un mapa, no un examen. Algunas noches te detendrás más en un paso; otras llegarás dormido al minuto seis. Todo tiene su tiempo, y el tuyo, esta noche, es descansar.',
+        reflect: 'De los cinco pasos del ritual, ¿cuál te resulta más natural y cuál te cuesta más? ¿Por qué?',
+        prayer: 'Señor del tiempo, ordena mis últimos diez minutos como tú ordenas las estaciones. Que esta secuencia sencilla se vuelva camino diario hacia ti. Amén.',
+        quiz: [
+          { q: '¿Cuál es el último paso del ritual (minutos 9-10)?', opts: ['La respiración de la calma', 'La oración de entrega con las manos abiertas', 'El recorrido de luz'], a: 1, ex: 'El ritual termina entregándose: tres veces, despacio, con las manos abiertas.' },
+          { q: 'La secuencia del ritual es…', opts: ['Un examen que hay que aprobar', 'Un mapa flexible, no una obligación', 'Válida solo si se hace completa'], a: 1, ex: 'Es un mapa: algunas noches el sueño llegará antes de terminar, y eso está bien.' }
+        ] },
+      { title: 'Ángeles en la Escritura', sub: 'Agar, Elías, Pedro: cuando el cielo toca a los agotados.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Y he aquí luego un ángel le tocó, y le dijo: Levántate, come', ref: '1 Reyes 19:5',
+        p1: 'Elías huye por el desierto, agotado hasta desear la muerte, y se queda dormido bajo un enebro. Lo que sigue es una de las escenas más tiernas de la Biblia: un ángel lo toca y le dice «levántate, come». No un sermón; pan recién hecho y agua, y permiso para volver a dormir.',
+        p2: 'Agar, expulsada y sin agua, es encontrada por el ángel junto a una fuente que no veía. Pedro, encadenado entre dos soldados, duerme tan profundo la víspera de su juicio que el ángel tiene que sacudirlo para liberarlo. En los tres casos el patrón es el mismo: el cielo se acerca a los agotados.',
+        p3: 'Los ángeles bíblicos no aparecen en los templos dorados sino en los desiertos, las cárceles y los agotamientos. Si esta temporada te encuentra exhausto, estás exactamente en el tipo de lugar donde suelen aparecer.',
+        reflect: '¿En qué momento de agotamiento pasado puedes reconocer, mirando atrás, un cuidado que no supiste ver entonces?',
+        prayer: 'Dios de Elías, cuando esté agotado hasta no poder orar, tócame como aquel ángel: con pan, con agua, con permiso para dormir. Amén.',
+        quiz: [
+          { q: '¿Qué hizo el ángel con Elías agotado bajo el enebro?', opts: ['Le dio un sermón sobre la fe', 'Le dio comida, agua y permiso para dormir', 'Lo envió de vuelta a la ciudad'], a: 1, ex: '«Levántate, come»: cuidado concreto y descanso, no reproches.' },
+          { q: '¿Dónde suelen aparecer los ángeles en la Biblia?', opts: ['En los templos dorados', 'En desiertos, cárceles y agotamientos', 'Solo en los sueños de los reyes'], a: 1, ex: 'El cielo se acerca a los agotados: Agar, Elías, Pedro.' }
+        ] },
+      { title: 'El ángel de tu guarda', sub: 'La antigua confianza en un custodio personal.', kicker: 'Fundamento', min: '10 min',
+        verse: 'Mirad que no menospreciéis a uno de estos pequeños; porque os digo que sus ángeles en los cielos ven siempre el rostro de mi Padre', ref: 'Mateo 18:10',
+        p1: 'Jesús habla de los pequeños diciendo que «sus ángeles» ven siempre el rostro del Padre. De esa frase nació una de las intuiciones más antiguas y consoladoras de la fe: cada persona tiene un custodio, un testigo celestial de su vida que nunca pierde de vista a Dios ni te pierde de vista a ti.',
+        p2: 'No sabemos los detalles y no hace falta saberlos. Lo que la imagen protege es una verdad enorme: no hay vida anónima para Dios. Nadie duerme solo del todo; ninguna noche tuya transcurre sin testigo amoroso.',
+        p3: 'Muchas generaciones aprendieron a orar de niños con esta certeza, y de adultos la olvidamos justo cuando más la necesitamos. Esta noche recupérala sin vergüenza: la fe sencilla también es fe, y a veces es la más honda.',
+        reflect: '¿Cómo cambia tu manera de apagar la luz saber que tu vida tiene un testigo amoroso permanente?',
+        prayer: 'Padre, gracias por el custodio que vela mi vida. Que su mirada, siempre puesta en ti, me recuerde que jamás estoy solo, ni siquiera dormido. Amén.',
+        quiz: [
+          { q: '¿Qué dice Jesús de los ángeles de los pequeños?', opts: ['Ven siempre el rostro del Padre', 'Duermen cuando ellos duermen', 'Solo actúan de día'], a: 0, ex: 'Mateo 18:10: sus ángeles ven siempre el rostro de mi Padre que está en los cielos.' },
+          { q: '¿Qué verdad protege la imagen del ángel de la guarda?', opts: ['Que hay vidas más importantes que otras', 'Que no hay vida anónima para Dios', 'Que no necesitamos orar'], a: 1, ex: 'Nadie duerme del todo solo: ninguna noche transcurre sin testigo amoroso.' }
+        ] },
+      { title: 'Discernir la voz de la paz', sub: 'Cómo distinguir lo que viene de Dios de lo que viene del miedo.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo', ref: 'Juan 14:27',
+        p1: 'De noche, la mente habla mucho, y no todas sus voces merecen ser escuchadas. Los maestros espirituales dan un criterio sencillo y probado: lo que viene de Dios trae paz, aunque exija algo; lo que viene del miedo trae agitación, urgencia y confusión, aunque parezca razonable.',
+        p2: 'Practícalo esta noche como un pequeño examen: ante el pensamiento que insiste, pregúntate —¿esta voz me trae paz o me acelera? ¿me acerca a la confianza o me hunde en el pánico? Las decisiones importantes no se toman a las tres de la mañana: esa hora tiene voz propia y casi nunca es la de Dios.',
+        p3: 'A la voz que agita, respóndele con el versículo de Juan: «no se turbe vuestro corazón». A la voz de la paz, aunque sea pequeña como un hilo, síguela: ese hilo lleva a casa.',
+        reflect: '¿Qué “voz de las tres de la mañana” suele visitarte? ¿Qué le responderías esta noche?',
+        prayer: 'Jesús, dame oído para tu paz y sordera amorosa para el pánico. Que en la noche siga solo el hilo de tu voz. Amén.',
+        quiz: [
+          { q: '¿Cuál es el criterio para discernir las voces nocturnas?', opts: ['Lo de Dios trae paz; lo del miedo trae agitación', 'Las voces más fuertes son las verdaderas', 'De noche todas las voces son iguales'], a: 0, ex: 'La paz, aunque exija algo, es la firma de Dios; la urgencia confusa es la del miedo.' },
+          { q: '¿Qué se recomienda sobre decidir a las tres de la mañana?', opts: ['Es la mejor hora para pensar', 'No tomar decisiones importantes a esa hora', 'Levantarse a escribirlas'], a: 1, ex: 'Esa hora tiene voz propia y casi nunca es la de Dios.' }
+        ] },
+      { title: 'Sanación de las heridas del alma', sub: 'Llevar la luz de Dios a los recuerdos que aún duelen.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Él sana a los quebrantados de corazón, y venda sus heridas', ref: 'Salmo 147:3',
+        p1: 'Algunas noches no las perturba el presente sino el pasado: un recuerdo que vuelve, una palabra que dolió hace años, una pérdida antigua. El Salmo dice que Dios no solo sana a los quebrantados: venda sus heridas, con el cuidado artesanal de quien conoce cada llaga.',
+        p2: 'Esta práctica es delicada y no tiene prisa: elige un recuerdo doloroso —uno pequeño para empezar— e imagínalo como una escena en penumbra. Ahora pide la luz: deja que la presencia de Dios entre en esa escena, no para borrarla, sino para acompañarla. No estabas solo entonces, aunque no lo supieras.',
+        p3: 'Si hay heridas grandes, considera acompañarlas también con un terapeuta o un pastor: Dios sana asimismo a través de las personas. La valentía de pedir ayuda es parte de la sanación, no su fracaso.',
+        reflect: '¿Qué recuerdo pequeño y antiguo podrías presentarle a la luz de Dios esta noche?',
+        prayer: 'Sanador de corazones, entra con tu luz en mis memorias. Venda lo que sigue abierto, acompaña lo que no entiendo, y dame valentía para dejarme ayudar. Amén.',
+        quiz: [
+          { q: 'Según el Salmo 147:3, Dios…', opts: ['Olvida a los quebrantados', 'Sana a los quebrantados y venda sus heridas', 'Solo sana el cuerpo'], a: 1, ex: 'Venda las heridas: un cuidado artesanal, llaga por llaga.' },
+          { q: '¿Qué papel tiene pedir ayuda profesional en la sanación?', opts: ['Es un fracaso de la fe', 'Es parte de la sanación: Dios sana también a través de personas', 'Solo sirve sin oración'], a: 1, ex: 'La valentía de pedir ayuda es parte del camino, no su derrota.' }
+        ] },
+      { title: 'Gratitud a Dios por sus mensajeros', sub: 'Terminar la parte tercera alabando al que envía.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Bendecid a Jehová, vosotros sus ángeles, poderosos en fortaleza, que ejecutáis su palabra', ref: 'Salmo 103:20',
+        p1: 'El Salmo 103 imagina un coro inmenso: el salmista bendice a Dios y de pronto invita a los ángeles a bendecirlo con él. Es una escena hermosa: la criatura pequeña y los poderosos mensajeros, unidos en la misma alabanza, mirando juntos al mismo trono.',
+        p2: 'Esta noche súmate al coro. Antes de dormir, agradece a Dios tres cuidados concretos de esta semana que no fabricaste tú: un peligro evitado, una palabra oportuna, una fuerza que no sabías de dónde salía. Quizá nunca sabrás qué manos invisibles participaron; no hace falta. La gratitud no necesita ver los hilos para agradecer al tejedor.',
+        p3: 'La alabanza compartida con los ángeles tiene un efecto secundario espléndido: pone tu problema en un cielo enorme. Quien se duerme alabando se duerme en un universo cuidado.',
+        reflect: '¿Qué tres cuidados de esta semana no te diste tú mismo? Nómbralos antes de dormir.',
+        prayer: 'Bendice, alma mía, al Señor, y bendecidlo conmigo, ángeles suyos. Gracias por los cuidados visibles y por los que nunca sabré. Amén.',
+        quiz: [
+          { q: '¿A quiénes invita el salmista a bendecir a Dios en el Salmo 103?', opts: ['Solo a los sacerdotes', 'A los ángeles, poderosos en fortaleza', 'A los reyes de la tierra'], a: 1, ex: 'La criatura y los mensajeros se unen en la misma alabanza.' },
+          { q: '¿Qué propone la práctica de esta noche?', opts: ['Pedir tres cosas nuevas', 'Agradecer tres cuidados concretos que no fabricaste tú', 'Contar los problemas de la semana'], a: 1, ex: 'La gratitud no necesita ver los hilos para agradecer al tejedor.' }
+        ] }
+    ];
+  }
+
+  applyNight(on) {
+    const r = document.documentElement.style;
+    const vars = {
+      '--bg': 'oklch(0.19 0.025 295)', '--surface': 'oklch(0.245 0.03 295)', '--ink': 'oklch(0.93 0.015 295)',
+      '--muted': 'oklch(0.78 0.025 295)', '--muted2': 'oklch(0.67 0.03 295)',
+      '--border': 'oklch(0.32 0.03 295)', '--border2': 'oklch(0.37 0.035 295)', '--border3': 'oklch(0.44 0.05 295)',
+      '--headerbg': 'oklch(0.19 0.025 295 / 0.92)',
+      '--wash': 'linear-gradient(135deg, oklch(0.27 0.035 295), oklch(0.29 0.03 85))',
+      '--chipbg': 'oklch(0.31 0.05 295)', '--goldwash': 'oklch(0.3 0.045 85)', '--hover': 'oklch(0.29 0.03 295)',
+      '--okbg': 'oklch(0.33 0.06 150)', '--badbg': 'oklch(0.31 0.05 25)',
+      '--accentink': 'oklch(0.82 0.07 295)', '--goldink': 'oklch(0.8 0.08 85)', '--goldink2': 'oklch(0.78 0.08 85)'
+    };
+    Object.keys(vars).forEach((k) => { if (on) r.setProperty(k, vars[k]); else r.removeProperty(k); });
+    document.body.style.background = on ? 'oklch(0.19 0.025 295)' : '#FBF9F5';
+  }
+
+  newChaptersB() {
+    return [
+      { title: 'Ansiedad que llega de noche', sub: 'Qué hacer cuando el corazón se acelera al apagar la luz.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias', ref: 'Filipenses 4:6',
+        p1: 'La ansiedad nocturna tiene una lógica cruel: el silencio que debería descansarte le deja el escenario libre. Pablo, que escribió desde una cárcel, da una receta de tres pasos: orar, pedir con concreción y agradecer. No dice «no sientas»; dice «no te quedes a solas con lo que sientes».',
+        p2: 'Cuando el pecho se acelere, no huyas de la sensación ni la combatas: ponle nombre («esto es ansiedad, no es una emergencia»), vuelve a tu respiración 4-2-6 y convierte cada preocupación en petición dicha a Alguien. La ansiedad rumiada crece; la ansiedad orada se va vaciando.',
+        p3: 'Y añade siempre la tercera parte de la receta: la acción de gracias. Agradecer en medio de la ansiedad no es negarla; es recordarle al corazón que la historia es más grande que esta noche.',
+        reflect: '¿Qué preocupación rumias últimamente que todavía no has convertido en petición concreta?',
+        prayer: 'Dios cercano, tomo mi ansiedad y te la digo con nombre y apellido. La cambio por tu paz, esa que no entiendo pero recibo. Gracias porque me escuchas a cualquier hora. Amén.',
+        quiz: [
+          { q: '¿Cuál es la receta de Filipenses 4:6?', opts: ['Distraerse hasta dormirse', 'Oración, petición concreta y acción de gracias', 'No sentir ansiedad nunca'], a: 1, ex: 'Pablo no dice «no sientas»: dice «no te quedes a solas con lo que sientes».' },
+          { q: '¿Qué diferencia hay entre rumiar y orar la ansiedad?', opts: ['Ninguna', 'La rumiada crece; la orada se vacía', 'Orar la aumenta'], a: 1, ex: 'Convertir cada preocupación en petición dicha a Alguien la va vaciando.' }
+        ] },
+      { title: 'Después de una pesadilla', sub: 'Volver a dormir cuando el mal sueño te despierta.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'No temerás el terror nocturno, ni saeta que vuele de día', ref: 'Salmo 91:5',
+        p1: 'Despertar de una pesadilla deja el cuerpo en alarma: corazón rápido, sudor, la sensación de que algo malo es verdad. Lo primero es devolverle al cuerpo la realidad: enciende una luz suave, toca algo sólido, di tu nombre y la fecha en voz baja. Estás aquí; era un sueño.',
+        p2: 'Después, no analices la pesadilla a oscuras: la noche es mala intérprete. El Salmo 91 llama al miedo nocturno por su nombre —terror nocturno— y lo desarma con una promesa: no lo temerás, porque estás cubierto. Repite el versículo despacio hasta que el pulso baje.',
+        p3: 'Cierra con una imagen luminosa deliberada: la habitación llena de la claridad suave del amanecer, los ángeles de Dios velando la puerta. No es fantasía: es reemplazar la imagen del miedo por la imagen de la verdad. El que te cuida no se ha movido de tu lado.',
+        reflect: '¿Qué imagen luminosa y verdadera quieres tener preparada para las noches en que despiertes con miedo?',
+        prayer: 'Padre de la luz, borra de mí las imágenes del miedo y graba las de tu verdad: tú velas, yo descanso. No temeré el terror nocturno. Amén.',
+        quiz: [
+          { q: '¿Qué es lo primero tras despertar de una pesadilla?', opts: ['Analizar el sueño', 'Devolver al cuerpo la realidad: luz suave, tocar algo, decir tu nombre', 'Levantarse a caminar'], a: 1, ex: 'Primero se calma el cuerpo; el análisis a oscuras es mal consejero.' },
+          { q: '¿Cómo desarma el Salmo 91 al miedo nocturno?', opts: ['Ignorándolo', 'Nombrándolo y prometiendo cobertura: «no temerás el terror nocturno»', 'Con un ritual complicado'], a: 1, ex: 'El miedo nombrado ante la promesa de Dios pierde su poder.' }
+        ] },
+      { title: 'Dormir en tiempos de duelo', sub: 'Cuando la ausencia se acuesta contigo.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'Bienaventurados los que lloran, porque ellos recibirán consolación', ref: 'Mateo 5:4',
+        p1: 'El duelo cambia las noches: la cama es más grande, la casa más callada, y el sueño llega tarde o se rompe de madrugada. Jesús llamó bienaventurados a los que lloran —no a los que disimulan— y prometió para ellos consolación. Llorar de noche no es retroceder: es hacer el trabajo santo del duelo.',
+        p2: 'Sé paciente con tu sueño en este tiempo: dormirá contigo el que ya no está durante muchas noches de recuerdos, y está bien. Puedes despedir el día nombrando a tu ser querido en la oración: agradecer un recuerdo concreto, encomendarlo a Dios, y pedirle a Él que guarde tu noche.',
+        p3: 'Y cuando la ola sea demasiado grande, no la enfrentes solo: llama de día a alguien que sepa escucharte, busca una comunidad, deja que te acompañen. La consolación prometida suele llegar con rostros concretos.',
+        reflect: '¿Qué recuerdo concreto de tu ser querido quieres agradecer esta noche en lugar de solo extrañar?',
+        prayer: 'Dios de toda consolación, guarda a quien amo y ya descansa en ti, y guárdame a mí en esta noche de ausencia. Convierte mis lágrimas en oración y mi recuerdo en gratitud. Amén.',
+        quiz: [
+          { q: '¿A quiénes llama Jesús bienaventurados en Mateo 5:4?', opts: ['A los que disimulan el dolor', 'A los que lloran', 'A los que nunca sufren'], a: 1, ex: 'Llorar es hacer el trabajo santo del duelo; para ellos hay consolación prometida.' },
+          { q: '¿Qué propone la oración nocturna en el duelo?', opts: ['Evitar pensar en la persona', 'Agradecer un recuerdo concreto y encomendarla a Dios', 'Repasar la pérdida en detalle'], a: 1, ex: 'La gratitud por lo vivido va transformando lentamente la ausencia.' }
+        ] },
+      { title: 'Cuando el cuerpo duele', sub: 'Descansar con dolor crónico o enfermedad.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'Bástate mi gracia; porque mi poder se perfecciona en la debilidad', ref: '2 Corintios 12:9',
+        p1: 'Hay noches en que el obstáculo no está en la mente sino en el cuerpo: un dolor que no cede, una enfermedad que no da tregua. Pablo conocía ese terreno: pidió tres veces que le quitaran su aguijón y recibió otra respuesta: «bástate mi gracia». No era un no indiferente; era una compañía más honda que el alivio.',
+        p2: 'En la noche con dolor, baja las expectativas con misericordia: quizá el objetivo no sea dormir ocho horas, sino descansar en fragmentos, con la mejor postura posible y las ayudas que la medicina ofrezca —tomarlas también es confiar en Dios, que sana por muchos caminos.',
+        p3: 'Y usa el recorrido de luz de otra manera: en vez de esquivar la zona que duele, llévale la luz directamente, sin exigirle que sane esta noche, solo acompañándola: «también tú eres mía, también a ti te cubre su gracia». El dolor acompañado pesa distinto.',
+        reflect: '¿Puedes distinguir entre pedir alivio y pedir compañía en el dolor? ¿Cuál necesitas más esta noche?',
+        prayer: 'Señor, tres veces te pido alivio, y las tres me escuchas. Si el dolor se queda esta noche, quédate tú también. Bástame tu gracia; perfecciona tu poder en mi debilidad. Amén.',
+        quiz: [
+          { q: '¿Qué respondió Dios a la triple petición de Pablo?', opts: ['Un silencio total', '«Bástate mi gracia: mi poder se perfecciona en la debilidad»', 'Que orara con más fe'], a: 1, ex: 'No fue un no indiferente: fue una compañía más honda que el alivio.' },
+          { q: '¿Cómo se usa el recorrido de luz cuando algo duele?', opts: ['Se esquiva la zona dolorida', 'Se lleva la luz directamente a la zona, acompañándola', 'Se suspende la práctica'], a: 1, ex: 'El dolor acompañado pesa distinto: la luz no exige, acompaña.' }
+        ] },
+      { title: 'Preocupaciones que no dejan dormir', sub: 'Dinero, trabajo y futuro: los números de la madrugada.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'Mirad las aves del cielo, que no siembran, ni siegan… y vuestro Padre celestial las alimenta. ¿No valéis vosotros mucho más que ellas?', ref: 'Mateo 6:26',
+        p1: 'Las cuentas de la madrugada tienen una particularidad: nunca salen. A las tres de la mañana todo déficit parece ruina y todo riesgo, catástrofe. Jesús no ignoraba la economía —habló de jornales, deudas y talentos— pero señaló a las aves: el Padre las alimenta, y tú vales mucho más.',
+        p2: 'La regla práctica es simple y firme: los problemas de dinero se trabajan de día, con papel, luz y cabeza fresca —y si hace falta, con ayuda—. De noche solo se entregan. Ten junto a la cama una libreta: si el pendiente insiste, escríbelo en una línea y dile «te veo mañana a las diez».',
+        p3: 'Escribirlo no es magia: es sacarlo de la rueda mental y darle cita. Y la entrega tampoco es pasividad: es reconocer que entre tu diligencia y tu futuro hay un Padre que alimenta aves y cuenta cabellos.',
+        reflect: '¿Qué preocupación económica necesita una cita de día en vez de una rueda de madrugada?',
+        prayer: 'Padre providente, tú vistes lirios y alimentas aves. Trabajaré de día con diligencia; de noche, suelto los números en tus manos. Valgo más que los pájaros: me lo dijiste tú. Amén.',
+        quiz: [
+          { q: '¿Cuál es la regla práctica sobre los problemas de dinero?', opts: ['Resolverlos de madrugada, que hay silencio', 'Trabajarlos de día y entregarlos de noche', 'No pensar en ellos jamás'], a: 1, ex: 'De día: papel, luz y ayuda. De noche: libreta, una línea y cita para mañana.' },
+          { q: '¿Qué enseña Mateo 6:26 con las aves?', opts: ['Que no hay que trabajar', 'Que el Padre provee y tú vales mucho más que ellas', 'Que el dinero no existe'], a: 1, ex: 'Entre tu diligencia y tu futuro hay un Padre que alimenta aves.' }
+        ] },
+      { title: 'Noches lejos de casa', sub: 'Hoteles, hospitales, viajes: dormir en tierra extraña.', kicker: 'Acompañamiento', min: '10 min',
+        verse: 'Si tomare las alas del alba y habitare en el extremo del mar, aun allí me guiará tu mano, y me asirá tu diestra', ref: 'Salmo 139:9-10',
+        p1: 'Hay noches que nos encuentran en camas ajenas: la habitación de hospital, el hotel de trabajo, la casa prestada, el país nuevo. El cuerpo nota la extrañeza y el sueño se vuelve ligero. El Salmo 139 tiene la respuesta más viajera de la Biblia: no existe ningún «lejos» para la mano de Dios.',
+        p2: 'Lleva tu ritual contigo: es la ventaja de un santuario que no pesa. La misma respiración, la misma entrega, el mismo versículo de siempre: los hábitos sagrados convierten cualquier cuarto anónimo en territorio conocido. Puedes llevar también una señal física pequeña —una tarjeta con tu versículo, una foto— que le diga al corazón: aquí también.',
+        p3: 'Y si la noche extraña es de hospital, junto a alguien que cuidas o esperando un resultado, recuerda: las alas del alba también llegan ahí. Ninguna sala de espera queda fuera del alcance de su diestra.',
+        reflect: '¿Qué elemento portátil de tu ritual te ayudaría a hacer tuyo cualquier lugar donde duermas?',
+        prayer: 'Dios de los caminos, en esta cama que no es la mía, tú sí eres el de siempre. Guíame tu mano, áseme tu diestra, y hazme dormir en casa dondequiera que esté. Amén.',
+        quiz: [
+          { q: '¿Qué responde el Salmo 139 a la lejanía?', opts: ['Que es mejor no viajar', 'Que no existe «lejos» para la mano de Dios', 'Que hay lugares sin Dios'], a: 1, ex: 'Aun en el extremo del mar: «aun allí me guiará tu mano».' },
+          { q: '¿Por qué ayuda el ritual en camas ajenas?', opts: ['Porque es entretenido', 'Porque los hábitos sagrados vuelven conocido cualquier cuarto', 'Porque sustituye al equipaje'], a: 1, ex: 'Un santuario que no pesa: la misma entrega convierte lo anónimo en territorio conocido.' }
+        ] },
+      { title: 'Despertar con propósito', sub: 'El ritual de la mañana: los primeros tres minutos del día.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Hazme oír por la mañana tu misericordia, porque en ti he confiado; hazme saber el camino por donde ande', ref: 'Salmo 143:8',
+        p1: 'La noche en paz tiene una hermana: la mañana con propósito. No hace falta madrugar más; hacen falta tres minutos antes del teléfono. Minuto uno: aún en la cama, agradece el simple hecho de despertar y di el versículo de la mañana: «hazme oír tu misericordia».',
+        p2: 'Minuto dos: pide dirección para lo concreto de hoy —esa reunión, esa conversación, ese pendiente— con la petición del salmista: «hazme saber el camino». Minuto tres: encomienda a las personas que verás hoy. Después sí: el mundo, las noticias, los mensajes.',
+        p3: 'Quien entrega la noche y recibe la mañana cierra el círculo completo: el día entero queda dentro de la conversación con Dios. Verás que el ritual nocturno mejora cuando existe el matutino: son las dos orillas del mismo río.',
+        reflect: '¿Qué sueles hacer en tus primeros tres minutos despierto? ¿Qué pasaría si fueran de Dios antes que del teléfono?',
+        prayer: 'Dios de la mañana, tu misericordia madruga más que yo. Hazme oírla antes que cualquier otra voz, y muéstrame el camino de este día. Amén.',
+        quiz: [
+          { q: '¿Qué propone el ritual de la mañana?', opts: ['Madrugar dos horas más', 'Tres minutos de gratitud, dirección y encomienda antes del teléfono', 'Revisar noticias primero'], a: 1, ex: 'No es más tiempo: es el primer lugar del día para Dios.' },
+          { q: '¿Por qué la mañana mejora el ritual nocturno?', opts: ['Porque son las dos orillas del mismo río', 'Porque reemplaza a la noche', 'No tienen relación'], a: 0, ex: 'Entregar la noche y recibir la mañana cierra el círculo del día en Dios.' }
+        ] },
+      { title: 'El descanso semanal', sub: 'Un día distinto: el sabbat como medicina antigua.', kicker: 'Fundamento', min: '10 min',
+        verse: 'El día de reposo fue hecho por causa del hombre, y no el hombre por causa del día de reposo', ref: 'Marcos 2:27',
+        p1: 'Dios trabajó seis días y descansó el séptimo, y mandó a su pueblo imitarlo. Jesús aclaró el sentido: el reposo fue hecho para el hombre —es regalo, no jaula—. En un mundo que no apaga nunca, un día distinto a la semana es de las medicinas más contraculturales y sanadoras que existen.',
+        p2: 'No hace falta legalismo: hace falta diseño. Elige un día (o medio, para empezar) y decide qué NO harás en él: correos de trabajo, compras por hábito, la lista de pendientes. Y decide qué SÍ: mesa compartida, caminar sin reloj, culto o comunidad, la siesta sin culpa, lo que te devuelve el alma al cuerpo.',
+        p3: 'El descanso semanal riega el nocturno: quien nunca para de semana en semana llega a cada noche con una deuda que diez minutos no pueden pagar. El sabbat es el ritual de la noche, a escala de la vida.',
+        reflect: '¿Cómo sería tu día de reposo ideal? Escribe dos cosas que no harías y tres que sí.',
+        prayer: 'Señor del sábado, enséñame a parar. Regálame un día a tu ritmo, sin culpa y sin pantallas, para recordar que el mundo sigue girando sin mí porque lo sostienes tú. Amén.',
+        quiz: [
+          { q: '¿Qué aclaró Jesús sobre el día de reposo?', opts: ['Que ya no era necesario', 'Que fue hecho por causa del hombre: es regalo, no jaula', 'Que era solo para los sacerdotes'], a: 1, ex: 'El reposo es un don diseñado para el bien del ser humano.' },
+          { q: '¿Cómo se diseña un día de reposo?', opts: ['Con más reglas y prohibiciones', 'Decidiendo qué no harás y qué sí te devuelve el alma', 'Durmiendo todo el día'], a: 1, ex: 'No legalismo sino diseño: mesa, camino, comunidad, siesta sin culpa.' }
+        ] },
+      { title: 'El ritual en familia', sub: 'Orar la noche en pareja, con hijos, en comunidad.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Pero yo y mi casa serviremos a Jehová', ref: 'Josué 24:15',
+        p1: 'El ritual nació personal, pero multiplica su fruto cuando se comparte. En pareja: cinco minutos antes de dormir, una gratitud cada uno, un perdón si hace falta, y la entrega dicha juntos. Pocas cosas sanan tanto un matrimonio como no acostarse enojados y orar tomados de la mano.',
+        p2: 'Con hijos: los niños entienden de rituales mejor que nadie. Una bendición al arroparlos —«que los ángeles de Dios cuiden tu sueño»—, un versículo cortito, una gratitud del día. Lo que un niño oye cada noche al borde del sueño lo acompaña toda la vida: estás sembrando en tierra profunda.',
+        p3: 'Y en comunidad: compartir el camino con un grupo —una semana de ritual juntos, un mensaje de versículo cada noche— sostiene la constancia cuando el ánimo flojea. La fe respira mejor en plural.',
+        reflect: '¿Con quién de tu casa o tu comunidad podrías compartir una parte del ritual esta semana?',
+        prayer: 'Señor, que mi casa te sirva también de noche. Bendice a los que duermen bajo este techo y a los que llevo en el corazón bajo otros techos. Yo y mi casa descansaremos en ti. Amén.',
+        quiz: [
+          { q: '¿Qué propone el ritual en pareja?', opts: ['Ver una serie juntos', 'Gratitud, perdón si hace falta y entrega dicha juntos', 'Orar cada uno por separado siempre'], a: 1, ex: 'No acostarse enojados y orar juntos: pocas medicinas sanan tanto.' },
+          { q: '¿Por qué importa la bendición nocturna a los niños?', opts: ['Los ayuda a obedecer', 'Lo que oyen al borde del sueño los acompaña toda la vida', 'Es solo una costumbre'], a: 1, ex: 'Es siembra en tierra profunda: fe transmitida con manta y bendición.' }
+        ] },
+      { title: 'Pequeños descansos del alma', sub: 'Pausas de un minuto para volver a Dios en medio del día.', kicker: 'Práctica guiada', min: '10 min',
+        verse: 'Llevad mi yugo sobre vosotros… y hallaréis descanso para vuestras almas', ref: 'Mateo 11:29',
+        p1: 'El descanso no vive solo de noche. Los antiguos oraban con jaculatorias: frases de un suspiro —«Señor, ten piedad», «aquí estoy», «gracias»— lanzadas al cielo en medio del trabajo. Un minuto de retorno a Dios, varias veces al día, mantiene el alma respirando.',
+        p2: 'Prueba esta semana la pausa de los umbrales: cada vez que cruces una puerta importante —salir de casa, entrar al trabajo, volver—, una respiración honda y una frase: «contigo entro, contigo salgo». Los umbrales son recordatorios naturales; conviértelos en pequeñas capillas.',
+        p3: 'Estas migas de descanso cambian la noche: quien vuelve a Dios diez veces de día no llega a la cama desde tan lejos. El ritual nocturno deja de ser un viaje largo y se vuelve el último paso de un camino ya andado.',
+        reflect: '¿Qué umbrales cruzas cada día que podrían volverse pequeñas capillas de un minuto?',
+        prayer: 'Jesús manso y humilde, enséñame tus pausas. Que vuelva a ti en cada umbral, y llegue a la noche desde cerca. Hallaré descanso para mi alma. Amén.',
+        quiz: [
+          { q: '¿Qué es una jaculatoria?', opts: ['Una oración de un suspiro lanzada en medio del día', 'Un rezo de una hora', 'Un canto litúrgico'], a: 0, ex: '«Señor, ten piedad», «gracias», «aquí estoy»: retornos de un minuto a Dios.' },
+          { q: '¿Cómo cambian la noche las pausas del día?', opts: ['La hacen innecesaria', 'Se llega a la cama «desde más cerca» de Dios', 'No influyen'], a: 1, ex: 'Quien vuelve a Dios diez veces de día no llega a la noche desde tan lejos.' }
+        ] },
+      { title: 'Una paz que se contagia', sub: 'De dormir en paz a ser persona de paz.', kicker: 'Cierre', min: '10 min',
+        verse: 'Bienaventurados los pacificadores, porque ellos serán llamados hijos de Dios', ref: 'Mateo 5:9',
+        p1: 'La paz que recibes de noche no es solo para ti. Quien descansa distinto amanece distinto: más paciente en el tráfico, más suave en la palabra, más disponible para el que sufre. La primera misión de tu ritual sucede a la mañana siguiente, en gente que quizá nunca sabrá de este libro.',
+        p2: 'Jesús llama hijos de Dios a los pacificadores: no a los pacíficos que evitan conflictos, sino a los que fabrican paz activamente donde no la hay. Pregúntate cada mañana: ¿a quién puedo llevarle hoy un poco de la paz que recibí anoche? Un mensaje, una visita, una escucha sin prisa.',
+        p3: 'Así el círculo se completa: Dios te da paz por sus mensajeros, y tú te vuelves mensajero de esa paz para otros. El que aprendió a dormir bajo las alas termina prestando las suyas.',
+        reflect: '¿Quién en tu entorno necesita esta semana un poco de la paz que tú estás recibiendo?',
+        prayer: 'Dios de paz, no me dejes guardarme lo que me das. Hazme pacificador: que mi descanso de anoche sea el buen trato de hoy y tu paz corra de mano en mano. Amén.',
+        quiz: [
+          { q: '¿A quiénes llama Jesús hijos de Dios en Mateo 5:9?', opts: ['A los que evitan todo conflicto', 'A los pacificadores que fabrican paz activamente', 'A los que duermen bien'], a: 1, ex: 'No pacíficos pasivos: fabricantes de paz donde no la hay.' },
+          { q: '¿Dónde sucede la primera misión del ritual?', opts: ['En la cama', 'A la mañana siguiente, en el trato con otros', 'En el templo'], a: 1, ex: 'Quien descansa distinto amanece distinto: la paz recibida se contagia.' }
+        ] },
+      { title: 'Bendición final: ve en paz', sub: 'La bendición de Aarón para cada una de tus noches futuras.', kicker: 'Cierre', min: '10 min',
+        verse: 'Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti… y ponga en ti paz', ref: 'Números 6:24-26',
+        p1: 'Toda travesía merece una bendición de despedida, y ninguna es más antigua que la de Aarón: tres frases que el pueblo de Dios lleva miles de años poniendo sobre sus hijos. Que te bendiga y te guarde. Que su rostro resplandezca sobre ti. Que ponga en ti paz.',
+        p2: 'Recíbela esta noche palabra por palabra, como dicha para ti: bendecido —no maldito ni olvidado—; guardado —no expuesto—; mirado con un rostro que resplandece —no con ceño—; y con la paz puesta dentro, como se pone una semilla en tierra. Ese es el estado en el que Dios quiere que duermas todas las noches que te quedan.',
+        p3: 'Y ahora, conviértete tú en bendición: aprende estas frases de memoria y dilas sobre tu casa, tus hijos, tus enfermos y tus noches. Quien bendice al acostarse duerme dentro de las palabras que pronunció. Ve en paz: el ritual ya es tuyo.',
+        reflect: 'De toda la travesía de este libro, ¿qué te llevas? ¿Sobre quién dirás la bendición de Aarón esta noche?',
+        prayer: 'El Señor me bendiga y me guarde; haga resplandecer su rostro sobre mí y tenga de mí misericordia; vuelva a mí su rostro y ponga en mí paz. Y así, en paz me acuesto y duermo. Amén.',
+        quiz: [
+          { q: '¿Qué pide la bendición de Aarón?', opts: ['Riqueza y éxito', 'Ser bendecido, guardado, mirado con luz y recibir paz', 'Larga vida solamente'], a: 1, ex: 'Números 6:24-26: bendición, guarda, rostro resplandeciente y paz puesta dentro.' },
+          { q: '¿Cuál es la invitación final del libro?', opts: ['Empezar otro libro', 'Convertirse en bendición: decirla sobre otros cada noche', 'Guardar el ritual en secreto'], a: 1, ex: 'Quien bendice al acostarse duerme dentro de las palabras que pronunció.' }
+        ] }
+    ];
+  }
+
+  componentDidMount() { this.applyNight(this.state.night); }
+
+  openChapter(i) {
+    this.setState({ screen: 'reader', ch: i, quizIdx: 0, quizSel: null, quizScore: 0, quizFinished: false });
+    window.scrollTo(0, 0);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const chs = this.chapters;
+    const cur = chs[s.ch];
+    const done = s.completed;
+    const doneCount = done.length;
+    const total = chs.length;
+    const ph = this.photos[s.ch % this.photos.length];
+    const pct = Math.round((doneCount / total) * 100);
+    const navStyle = (active) => ({
+      border: 'none', cursor: 'pointer', fontFamily: "'Mulish', sans-serif", fontSize: '14px', fontWeight: 700,
+      padding: '8px 14px', borderRadius: '999px',
+      background: active ? 'var(--chipbg, oklch(0.95 0.025 295))' : 'transparent',
+      color: active ? 'var(--accentink, oklch(0.45 0.11 295))' : 'var(--muted, #6B6485)'
+    });
+
+    const chapterCards = chs.map((c, i) => {
+      const isDone = done.includes(i);
+      return {
+        title: c.title, sub: c.sub, meta: c.kicker + ' · ' + c.min,
+        numLabel: isDone ? '✓' : String(i + 1),
+        status: isDone ? 'Completado ✦' : 'Pendiente',
+        numStyle: {
+          width: '36px', height: '36px', flexShrink: 0, borderRadius: '50%',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontWeight: 800, fontSize: '14px',
+          background: isDone ? 'oklch(0.5 0.11 295)' : 'var(--chipbg, oklch(0.95 0.025 295))',
+          color: isDone ? '#FFFDF8' : 'var(--accentink, oklch(0.5 0.11 295))'
+        },
+        open: () => this.openChapter(i)
+      };
+    });
+
+    const partGroups = [];
+    chapterCards.forEach((card, i) => {
+      const p = chs[i].part;
+      let g = partGroups[partGroups.length - 1];
+      if (!g || g.name !== p) { g = { name: p, cards: [] }; partGroups.push(g); }
+      g.cards.push(card);
+    });
+
+    // Quiz
+    const quiz = cur.quiz;
+    const q = quiz[Math.min(s.quizIdx, quiz.length - 1)];
+    const answered = s.quizSel !== null;
+    const quizOptions = q.opts.map((label, i) => {
+      let bg = 'var(--surface, #FFFFFF)', border = 'var(--border2, oklch(0.9 0.03 295))', mark = '';
+      if (answered) {
+        if (i === q.a) { bg = 'var(--okbg, oklch(0.95 0.04 150))'; border = 'oklch(0.7 0.1 150)'; mark = '✓'; }
+        else if (i === s.quizSel) { bg = 'var(--badbg, oklch(0.96 0.02 25))'; border = 'oklch(0.75 0.09 25)'; mark = '✕'; }
+      }
+      return {
+        label, mark,
+        style: {
+          padding: '15px 18px', borderRadius: '14px', border: '1.5px solid ' + border,
+          background: bg, cursor: answered ? 'default' : 'pointer',
+          fontSize: '15.5px', fontWeight: 600, lineHeight: 1.45,
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px',
+          transition: 'all 0.2s'
+        },
+        pick: () => {
+          if (this.state.quizSel !== null) return;
+          this.setState({ quizSel: i, quizScore: this.state.quizScore + (i === q.a ? 1 : 0) });
+        }
+      };
+    });
+
+    const nextUncompleted = chs.findIndex((c, i) => !done.includes(i));
+    const startIdx = nextUncompleted === -1 ? 0 : nextUncompleted;
+
+    return {
+      isHome: s.screen === 'home', isIndex: s.screen === 'index', isReader: s.screen === 'reader',
+      isQuiz: s.screen === 'quiz', isProfile: s.screen === 'profile',
+      goHome: () => this.go('home'), goIndex: () => this.go('index'), goProfile: () => this.go('profile'),
+      navHomeStyle: navStyle(s.screen === 'home'),
+      navIndexStyle: navStyle(s.screen === 'index' || s.screen === 'reader' || s.screen === 'quiz'),
+      navProfileStyle: navStyle(s.screen === 'profile'),
+      ctaLabel: doneCount === 0 ? 'Comenzar el ritual' : 'Continuar · Capítulo ' + (startIdx + 1),
+      startRitual: () => this.openChapter(startIdx),
+      doneCount,
+      total,
+      partGroups,
+      emergencyPrayers: this.emergency,
+      progressBarStyle: { height: '100%', width: pct + '%', borderRadius: '999px', background: 'linear-gradient(90deg, oklch(0.6 0.11 295), oklch(0.75 0.1 85))', transition: 'width 0.6s ease' },
+      chapterCards,
+      cur: { n: s.ch + 1, title: cur.title, sub: cur.sub, kicker: cur.kicker, min: cur.min, verse: cur.verse, ref: cur.ref, p1: cur.p1, p2: cur.p2, p3: cur.p3, reflect: cur.reflect, prayer: cur.prayer,
+        imgSrc: 'https://unsplash.com/photos/' + ph.id + '/download?force=true&w=1600',
+        imgCredit: 'Photo by ' + ph.by + ' on Unsplash',
+        imgHref: ph.at },
+      coverSrc: 'https://unsplash.com/photos/' + this.cover.id + '/download?force=true&w=1600',
+      coverCredit: 'Photo by ' + this.cover.by + ' on Unsplash',
+      coverHref: this.cover.at,
+      showVerse: this.props.mostrarVersiculos ?? true,
+      startQuiz: () => { this.setState({ screen: 'quiz', quizIdx: 0, quizSel: null, quizScore: 0, quizFinished: false }); window.scrollTo(0, 0); },
+      backToReader: () => this.go('reader'),
+      nextCh: () => this.openChapter((s.ch + 1) % total),
+      nextLabel: s.ch === total - 1 ? 'Volver al inicio' : 'Capítulo siguiente →',
+      quizActive: !s.quizFinished,
+      quizFinished: s.quizFinished,
+      quizMeta: s.quizFinished ? 'Actividad completada' : 'Pregunta ' + (s.quizIdx + 1) + ' de ' + quiz.length,
+      quizQuestion: q.q,
+      quizOptions,
+      quizAnswered: answered,
+      quizExplain: (s.quizSel === q.a ? '✓ Correcto. ' : 'La respuesta correcta era: «' + q.opts[q.a] + '». ') + q.ex,
+      quizNext: () => {
+        if (s.quizIdx + 1 >= quiz.length) this.setState({ quizFinished: true });
+        else this.setState({ quizIdx: s.quizIdx + 1, quizSel: null });
+        window.scrollTo(0, 0);
+      },
+      quizNextLabel: s.quizIdx + 1 >= quiz.length ? 'Ver resultado' : 'Siguiente pregunta',
+      quizScore: s.quizScore, quizTotal: quiz.length,
+      finishLabel: done.includes(s.ch) ? 'Volver al índice' : 'Marcar capítulo como completado',
+      finishChapter: () => {
+        const completed = done.includes(s.ch) ? done : [...done, s.ch];
+        this.save(completed);
+        this.setState({ completed, screen: 'index' });
+        window.scrollTo(0, 0);
+      },
+      isResources: s.screen === 'resources',
+      goResources: () => this.go('resources'),
+      navResourcesStyle: navStyle(s.screen === 'resources'),
+      toggleNight: () => {
+        const nightOn = !this.state.night;
+        try { localStorage.setItem('ritual-noche-v1', nightOn ? '1' : '0'); } catch (e) {}
+        this.applyNight(nightOn);
+        this.setState({ night: nightOn });
+      },
+      nightIcon: s.night ? '☀' : '☾',
+      verseCards: chs.map((c, i) => ({ n: (i + 1 < 10 ? '0' : '') + (i + 1), verse: c.verse, ref: c.ref })),
+      printPage: () => window.print(),
+      certDone: doneCount === total,
+      certPending: doneCount < total,
+      certDate: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }),
+      exportDiary: () => {
+        let out = 'MI DIARIO ESPIRITUAL — 14 días en su presencia\n\n';
+        this.days.forEach((d, i) => {
+          const e = s.jEntries[i] || {};
+          if ((e.t && e.t.trim()) || (e.m && e.m.length)) {
+            out += 'Día ' + (i + 1) + ' · ' + d.t + '\n';
+            out += '«' + d.verse + '» (' + d.ref + ')\n';
+            if (e.m && e.m.length) out += 'Mi corazón: ' + e.m.join(', ') + '\n';
+            if (e.t && e.t.trim()) out += e.t.trim() + '\n';
+            out += '\n';
+          }
+        });
+        const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'mi-diario-espiritual.txt';
+        a.click();
+      },
+      isJournal: s.screen === 'journal',
+      isJournalDay: s.screen === 'jday',
+      goJournal: () => this.go('journal'),
+      backToJournal: () => this.go('journal'),
+      navJournalStyle: navStyle(s.screen === 'journal' || s.screen === 'jday'),
+      journalCards: this.days.map((d, i) => {
+        const e = s.jEntries[i] || {};
+        const has = !!((e.t && e.t.trim()) || (e.m && e.m.length));
+        return {
+          title: d.t, focus: d.f,
+          numLabel: has ? '✓' : String(i + 1),
+          status: has ? 'Escrito ✦' : 'Por escribir',
+          numStyle: {
+            width: '36px', height: '36px', flexShrink: 0, borderRadius: '50%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontWeight: 800, fontSize: '14px',
+            background: has ? 'oklch(0.72 0.1 85)' : 'var(--goldwash, oklch(0.96 0.03 85))',
+            color: has ? '#FFFDF8' : 'var(--goldink, oklch(0.55 0.09 85))'
+          },
+          open: () => { this.setState({ screen: 'jday', jDay: i }); window.scrollTo(0, 0); }
+        };
+      }),
+      journalDoneCount: this.days.reduce((n, d, i) => {
+        const e = s.jEntries[i] || {};
+        return n + (((e.t && e.t.trim()) || (e.m && e.m.length)) ? 1 : 0);
+      }, 0),
+      jd: { n: s.jDay + 1, t: this.days[s.jDay].t, f: this.days[s.jDay].f, verse: this.days[s.jDay].verse, ref: this.days[s.jDay].ref, q: this.days[s.jDay].q },
+      jMoodChips: ['En paz', 'Agradecido', 'Ansioso', 'Triste', 'Cansado', 'Esperanzado', 'Enojado', 'Confundido'].map((m) => {
+        const e = s.jEntries[s.jDay] || {};
+        const sel = (e.m || []).includes(m);
+        return {
+          label: m,
+          style: {
+            padding: '10px 16px', borderRadius: '999px', cursor: 'pointer',
+            fontSize: '14px', fontWeight: 700, transition: 'all 0.2s',
+            border: '1.5px solid ' + (sel ? 'oklch(0.5 0.11 295)' : 'var(--border2, oklch(0.9 0.03 295))'),
+            background: sel ? 'oklch(0.5 0.11 295)' : 'var(--surface, #FFFFFF)',
+            color: sel ? '#FFFDF8' : 'var(--muted, #6B6485)'
+          },
+          pick: () => {
+            const cur = (this.state.jEntries[s.jDay] || {}).m || [];
+            const m2 = cur.includes(m) ? cur.filter((x) => x !== m) : [...cur, m];
+            this.jUpdate(s.jDay, { m: m2 });
+          }
+        };
+      }),
+      jText: (s.jEntries[s.jDay] && s.jEntries[s.jDay].t) || '',
+      jTextChange: (ev) => this.jUpdate(s.jDay, { t: ev.target.value }),
+      jPrev: () => { this.setState({ jDay: Math.max(0, s.jDay - 1) }); window.scrollTo(0, 0); },
+      jNext: () => { this.setState({ jDay: Math.min(13, s.jDay + 1) }); window.scrollTo(0, 0); },
+      userName: this.props.nombreUsuario || 'tu alma',
+      pctLabel: pct + '%',
+      ringStyle: {
+        position: 'relative', width: '150px', height: '150px', borderRadius: '50%',
+        background: 'conic-gradient(oklch(0.6 0.11 295) ' + pct + '%, var(--border, oklch(0.94 0.015 295)) 0)'
+      },
+      minutesLabel: String(doneCount * 10),
+      versesCount: doneCount,
+      remainingCount: total - doneCount,
+      encouragement: doneCount === 0 ? 'Tu camino comienza esta noche. Un capítulo, diez minutos, una paz nueva.'
+        : doneCount < total ? 'Vas por buen camino. Cada noche completada es una semilla de paz.'
+        : 'Has completado el ritual. Que ahora sea tu compañero de por vida. ✦'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #FBF9F5; }
+  body { font-family: 'Mulish', sans-serif; color: #3B3550; -webkit-font-smoothing: antialiased; }
+  a { color: oklch(0.5 0.11 295); text-decoration: none; }
+  a:hover { color: oklch(0.4 0.11 295); }
+  @keyframes glowPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FBF9F5; padding-bottom: 110px;">
+
+  <!-- HERO -->
+  <section data-screen-label="Hero" style="position: relative; overflow: hidden; text-align: center; padding: 48px 22px 44px;">
+    <div style="position: absolute; top: -160px; left: 50%; transform: translateX(-50%); width: 680px; height: 500px; background: radial-gradient(ellipse at center, oklch(0.93 0.045 295 / 0.9), oklch(0.95 0.03 85 / 0.4) 55%, transparent 75%); animation: glowPulse 6s ease-in-out infinite; pointer-events: none;"></div>
+    <div style="position: relative; max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 999px; background: #FFFFFF; border: 1px solid oklch(0.9 0.03 295); font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.5 0.11 295);">✦ Precio de lanzamiento · solo por 7 días</div>
+      <h1 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(36px, 8vw, 56px); line-height: 1.1;">¿Cuántas noches llevas sin <em style="color: oklch(0.5 0.11 295);">dormir en paz</em>?</h1>
+      <p style="margin: 0; max-width: 520px; font-size: 19px; line-height: 1.65; color: #55506E;">Un ritual guiado de solo <strong>10 minutos cada noche</strong> para entregarle a Dios tus preocupaciones y descansar bajo el cuidado de sus ángeles. Sin técnicas complicadas. Sin experiencia previa.</p>
+      <div style="width: min(340px, 82vw); border-radius: 22px; overflow: hidden; box-shadow: 0 20px 50px oklch(0.6 0.08 295 / 0.35); border: 1px solid oklch(0.9 0.03 295);">
+        <div style="background: linear-gradient(160deg, oklch(0.35 0.06 295), oklch(0.25 0.05 295)); padding: 38px 26px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;">
+          <span style="font-size: 26px; color: oklch(0.8 0.08 85);">✦</span>
+          <span style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 30px; line-height: 1.15; color: oklch(0.97 0.01 295);">Ritual de 10 Minutos para Dormir en Paz</span>
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: oklch(0.8 0.08 85);">Con la sanación angelical</span>
+          <span style="font-size: 13.5px; font-weight: 700; color: oklch(0.85 0.03 295);">eBook interactivo · 35 capítulos + diario de 14 días</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-size: 22px; font-weight: 700; color: #8B84A3; text-decoration: line-through;">${{ precioAnterior }} USD</span>
+        <span style="font-size: 44px; font-weight: 800; color: oklch(0.45 0.11 295);">${{ precio }} USD</span>
+      </div>
+      <a href="{{ urlCompra }}" style="display: block; width: min(420px, 100%); box-sizing: border-box; padding: 20px 28px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-size: 19px; font-weight: 800; text-align: center; box-shadow: 0 10px 28px oklch(0.5 0.11 295 / 0.35);" style-hover="background: oklch(0.44 0.11 295); color: #FFFDF8">Quiero dormir en paz — ${{ precio }}</a>
+      <span style="font-size: 14.5px; font-weight: 600; color: #8B84A3;">✓ Acceso inmediato · ✓ Se lee desde tu celular · ✓ Garantía de 7 días</span>
+    </div>
+  </section>
+
+  <!-- IDENTIFICACIÓN -->
+  <section data-screen-label="Dolores" style="max-width: 620px; margin: 0 auto; padding: 30px 22px;">
+    <h2 style="margin: 0 0 20px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 36px); text-align: center;">¿Te pasa esto por las noches?</h2>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <sc-for list="{{ dolores }}" as="d" hint-placeholder-count="5">
+        <div style="background: #FFFFFF; border: 1px solid oklch(0.93 0.02 295); border-radius: 16px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start;">
+          <span style="flex-shrink: 0; font-size: 18px; color: oklch(0.6 0.09 85);">✦</span>
+          <span style="font-size: 17.5px; line-height: 1.6;">{{ d }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin: 24px 0 0; text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; line-height: 1.5; color: #55506E;">No es falta de fe. Es que nadie te enseñó a <strong style="color: oklch(0.45 0.11 295);">entregarle la noche a Dios</strong>.</p>
+  </section>
+
+  <!-- QUÉ INCLUYE -->
+  <section data-screen-label="Que incluye" style="max-width: 620px; margin: 0 auto; padding: 30px 22px;">
+    <h2 style="margin: 0 0 6px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 36px); text-align: center;">Todo lo que recibes hoy</h2>
+    <p style="margin: 0 0 22px; text-align: center; font-size: 16.5px; color: #6B6485;">Un eBook interactivo que funciona en cualquier celular, sin instalar nada.</p>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <sc-for list="{{ incluye }}" as="it" hint-placeholder-count="7">
+        <div style="background: #FFFFFF; border: 1px solid oklch(0.93 0.02 295); border-radius: 16px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start;">
+          <span style="flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: oklch(0.95 0.025 295); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: oklch(0.5 0.11 295);">✓</span>
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <strong style="font-size: 17px;">{{ it.t }}</strong>
+            <span style="font-size: 15.5px; line-height: 1.55; color: #6B6485;">{{ it.d }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ASÍ SE VE POR DENTRO -->
+  <section data-screen-label="Vista previa" style="max-width: 620px; margin: 0 auto; padding: 10px 22px 30px;">
+    <h2 style="margin: 0 0 6px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 36px); text-align: center;">Así se ve por dentro</h2>
+    <p style="margin: 0 0 22px; text-align: center; font-size: 16.5px; color: #6B6485;">Tu ritual y tu diario, siempre a un toque de distancia.</p>
+    <img src="images/mockup-preview.jpg" alt="Vista previa del eBook interactivo Dormir en Paz en el celular" style="width: 100%; height: auto; display: block; border-radius: 12px;" />
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section data-screen-label="Como funciona" style="background: linear-gradient(135deg, oklch(0.96 0.02 295), oklch(0.97 0.02 85)); border-top: 1px solid oklch(0.92 0.03 295); border-bottom: 1px solid oklch(0.92 0.03 295); padding: 38px 22px; margin: 20px 0;">
+    <div style="max-width: 620px; margin: 0 auto;">
+      <h2 style="margin: 0 0 22px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 36px); text-align: center;">Solo 10 minutos antes de dormir</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; gap: 16px; align-items: center;">
+          <span style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: oklch(0.5 0.11 295); color: #FFFDF8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px;">1</span>
+          <div><strong style="font-size: 17px;">Lee · 4 minutos</strong><p style="margin: 3px 0 0; font-size: 15.5px; line-height: 1.55; color: #6B6485;">Una lectura breve con un versículo que prepara tu corazón.</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; gap: 16px; align-items: center;">
+          <span style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: oklch(0.5 0.11 295); color: #FFFDF8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px;">2</span>
+          <div><strong style="font-size: 17px;">Practica · 4 minutos</strong><p style="margin: 3px 0 0; font-size: 15.5px; line-height: 1.55; color: #6B6485;">Respiración y visualización guiada con la luz de los ángeles.</p></div>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; gap: 16px; align-items: center;">
+          <span style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: oklch(0.5 0.11 295); color: #FFFDF8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px;">3</span>
+          <div><strong style="font-size: 17px;">Ora y entrega · 2 minutos</strong><p style="margin: 3px 0 0; font-size: 15.5px; line-height: 1.55; color: #6B6485;">Una oración de entrega para dormirte en las manos de Dios.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <sc-if value="{{ mostrarTestimonios }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Testimonios" style="max-width: 620px; margin: 0 auto; padding: 30px 22px;">
+      <h2 style="margin: 0 0 22px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 36px); text-align: center;">Ellas ya duermen distinto</h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <sc-for list="{{ testimonios }}" as="t" hint-placeholder-count="3">
+          <div style="background: #FFFFFF; border: 1px solid oklch(0.93 0.02 295); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 15px; letter-spacing: 2px; color: oklch(0.7 0.1 85);">★★★★★</span>
+            <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; line-height: 1.55;">«{{ t.q }}»</p>
+            <span style="font-size: 14.5px; font-weight: 700; color: #8B84A3;">{{ t.n }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- OFERTA -->
+  <section data-screen-label="Oferta" style="max-width: 620px; margin: 0 auto; padding: 30px 22px;">
+    <div style="background: oklch(0.35 0.06 295); border-radius: 26px; padding: clamp(28px, 6vw, 44px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; color: oklch(0.97 0.01 295);">
+      <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: oklch(0.8 0.08 85);">✦ Oferta de lanzamiento</span>
+      <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 38px); line-height: 1.15;">Menos de lo que cuesta una pizza. Para todas las noches de tu vida.</h2>
+      <div style="display: flex; align-items: baseline; gap: 12px;">
+        <span style="font-size: 20px; font-weight: 700; color: oklch(0.7 0.04 295); text-decoration: line-through;">${{ precioAnterior }}</span>
+        <span style="font-size: 52px; font-weight: 800; color: oklch(0.85 0.09 85);">${{ precio }}</span>
+        <span style="font-size: 16px; font-weight: 700; color: oklch(0.8 0.03 295);">USD · pago único</span>
+      </div>
+      <a href="{{ urlCompra }}" style="display: block; width: 100%; box-sizing: border-box; padding: 20px 28px; border-radius: 999px; background: oklch(0.85 0.09 85); color: oklch(0.25 0.05 295); font-size: 19px; font-weight: 800; text-align: center; box-shadow: 0 10px 28px oklch(0.2 0.04 295 / 0.5);" style-hover="background: oklch(0.9 0.09 85); color: oklch(0.25 0.05 295)">Sí, quiero mi ritual — ${{ precio }}</a>
+      <div style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.6; color: oklch(0.85 0.03 295);">
+        <span>🛡 <strong style="color: oklch(0.97 0.01 295);">Garantía de 7 días:</strong> si no te ayuda a dormir mejor, te devuelvo tu dinero. Sin preguntas.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section data-screen-label="Preguntas" style="max-width: 620px; margin: 0 auto; padding: 30px 22px 40px;">
+    <h2 style="margin: 0 0 22px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 6vw, 36px); text-align: center;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="background: #FFFFFF; border: 1px solid oklch(0.93 0.02 295); border-radius: 16px; overflow: hidden;">
+          <div onClick="{{ f.toggle }}" style="padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+            <strong style="font-size: 17px; line-height: 1.4;">{{ f.q }}</strong>
+            <span style="flex-shrink: 0; font-size: 20px; font-weight: 800; color: oklch(0.5 0.11 295);">{{ f.mark }}</span>
+          </div>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; padding: 0 20px 18px; font-size: 16px; line-height: 1.65; color: #55506E;">{{ f.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin: 30px 0 0; text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 21px; line-height: 1.5; color: #55506E;">«En paz me acostaré, y asimismo dormiré.»<br><span style="font-family: 'Mulish', sans-serif; font-style: normal; font-size: 13.5px; font-weight: 700; color: #8B84A3;">Salmo 4:8</span></p>
+  </section>
+
+  <!-- BARRA FIJA -->
+  <div data-screen-label="Barra compra" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; background: rgba(251,249,245,0.95); backdrop-filter: blur(12px); border-top: 1px solid oklch(0.9 0.03 295); padding: 12px 16px calc(12px + env(safe-area-inset-bottom));">
+    <div style="max-width: 620px; margin: 0 auto; display: flex; align-items: center; gap: 14px;">
+      <div style="display: flex; flex-direction: column; line-height: 1.1;">
+        <span style="font-size: 12.5px; font-weight: 700; color: #8B84A3; text-decoration: line-through;">${{ precioAnterior }}</span>
+        <span style="font-size: 24px; font-weight: 800; color: oklch(0.45 0.11 295);">${{ precio }}</span>
+      </div>
+      <a href="{{ urlCompra }}" style="flex: 1; display: block; padding: 16px 20px; border-radius: 999px; background: oklch(0.5 0.11 295); color: #FFFDF8; font-size: 17px; font-weight: 800; text-align: center; box-shadow: 0 8px 22px oklch(0.5 0.11 295 / 0.3);" style-hover="background: oklch(0.44 0.11 295); color: #FFFDF8">Quiero dormir en paz</a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;precio&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;4.99&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Oferta&quot; },
+  &quot;precioAnterior&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;14&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Oferta&quot; },
+  &quot;urlCompra&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;https://pay.hotmart.com/M94176097E&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Oferta&quot; },
+  &quot;mostrarTestimonios&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Contenido&quot; }
+}">
+class Component extends DCLogic {
+  state = { openFaq: null };
+
+  renderVals() {
+    const dolores = [
+      'Apagas la luz y la mente se enciende: las preocupaciones, los hijos, la salud, las cuentas.',
+      'Te despiertas a las 3 de la mañana y ya no puedes volver a dormirte.',
+      'Rezas, pero sientes que las palabras se quedan cortas cuando llega la angustia de la noche.',
+      'Amaneces más cansada de lo que te acostaste, y el día entero lo paga.',
+      'Sabes que Dios promete descanso… pero no sabes cómo recibirlo cada noche.'
+    ];
+    const incluye = [
+      { t: '35 capítulos guiados en 5 partes', d: 'Del fundamento bíblico del descanso hasta un plan para las noches más difíciles.' },
+      { t: 'El ritual de 10 minutos, paso a paso', d: 'Lectura, respiración, entrega y oración: la secuencia exacta para cada noche.' },
+      { t: 'Diario espiritual de 14 días', d: 'Para orar, reconocer tus emociones y escribirle a Dios. Se guarda solo en tu celular.' },
+      { t: '8 oraciones de emergencia', d: 'Para el insomnio, la ansiedad, las pesadillas, el duelo, la enfermedad y más.' },
+      { t: '35 tarjetas de versículos', d: 'Las palabras de paz de cada capítulo, listas para imprimir o guardar.' },
+      { t: 'Modo noche y actividades', d: 'Lectura suave para la oscuridad y un quiz sencillo por capítulo para afianzar lo aprendido.' },
+      { t: 'Certificado de paz', d: 'Al completar el camino, un certificado con tu nombre para imprimir y recordar.' }
+    ];
+    const testimonios = [
+      { q: 'Llevaba años tomando la noche como una batalla. Ahora son diez minutos con Dios y me duermo con una paz que no sabía que existía.', n: 'María E., 58 años' },
+      { q: 'Lo leo desde el celular, con letra grande y sin complicaciones. Las oraciones de emergencia me salvaron en el duelo de mi esposo.', n: 'Carmen R., 63 años' },
+      { q: 'El diario me enseñó a decirle a Dios lo que siento de verdad. Mis hijas ya me preguntaron cómo conseguirlo.', n: 'Rosa A., 55 años' }
+    ];
+    const faqData = [
+      { q: '¿Cómo lo recibo después de pagar?', a: 'Recibes de inmediato un enlace para abrir el eBook desde tu celular, tablet o computadora. No necesitas instalar ninguna aplicación: se abre como una página, con letra grande y botones fáciles.' },
+      { q: '¿Sirve para mi celular? No soy buena con la tecnología.', a: 'Sí. Está pensado especialmente para leerse desde el celular, con letras grandes y solo tocar botones. Si sabes abrir un enlace de WhatsApp o Facebook, sabes usar este eBook.' },
+      { q: '¿Es católico o evangélico?', a: 'Es cristiano y está basado completamente en la Biblia (Salmos, Evangelios y más). Lo pueden orar con provecho católicos, evangélicos y todo el que busque descansar en Dios.' },
+      { q: '¿La “sanación angelical” es algo esotérico?', a: 'No. El eBook lo aclara desde el primer capítulo: la fuente de toda sanación es Dios, y los ángeles son sus mensajeros y servidores, como enseña la Escritura (Hebreos 1:14, Salmo 91). Nada de magia ni fórmulas.' },
+      { q: '¿Cuánto tiempo necesito cada noche?', a: 'Solo 10 minutos antes de dormir: 4 de lectura, 4 de práctica guiada y 2 de oración. Y en las noches difíciles, las oraciones de emergencia son de un minuto.' },
+      { q: '¿Y si no me funciona?', a: 'Tienes 7 días de garantía. Si sientes que no te ayuda a dormir mejor, me escribes y te devuelvo tu dinero, sin preguntas.' }
+    ];
+    const faqs = faqData.map((f, i) => ({
+      q: f.q, a: f.a,
+      open: this.state.openFaq === i,
+      mark: this.state.openFaq === i ? '−' : '+',
+      toggle: () => this.setState({ openFaq: this.state.openFaq === i ? null : i })
+    }));
+    return {
+      precio: this.props.precio ?? '4.99',
+      precioAnterior: this.props.precioAnterior ?? '14',
+      urlCompra: this.props.urlCompra ?? 'https://pay.hotmart.com/M94176097E',
+      mostrarTestimonios: this.props.mostrarTestimonios ?? true,
+      dolores, incluye, testimonios, faqs
+    };
+  }
+}
+</script>
+</body>
+</html>
